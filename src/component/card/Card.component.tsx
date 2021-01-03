@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { CardC, NamePage } from './CardStyle';
 import { ContainerStyled } from '../container/Container';
 import Accordion from '../accordion/Accordion.component';
+import { Grid } from '@material-ui/core';
 
 type Props = {
     children?: ReactNode;
@@ -17,9 +18,11 @@ export default function ImgMediaCard({ children, title, titleAccordion, accordio
     const accordionC = <Accordion title={titleAccordion || ''}> {children} </Accordion >;
 
     return (
-        <ContainerStyled marginBottom={botton ?? 20}>
-            {title && <NamePage>{title}</NamePage>}
-            {accordion ? accordionC : card}
-        </ContainerStyled>
+        <Grid item xs={12}>
+            <ContainerStyled marginBottom={botton ?? 20}>
+                {title && <NamePage>{title}</NamePage>}
+                {accordion ? accordionC : card}
+            </ContainerStyled>
+        </Grid>
     );
 }

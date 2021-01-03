@@ -11,10 +11,10 @@ import GridComponent from '../grid/GridComponent.component';
 export default function CircularIndeterminate() {
 
     const [menuNumber, setMenuNumber] = useState<string>('');
-    const [menuQuizzes] = useState<Array<any>>([{ title: 'Meus Quizzes', href: 'meus-quizes' }, { title: 'Todos os Quizzes', href: 'todos-quizes' }]);
-    const [menuMissions] = useState<Array<any>>([{ title: 'Minhas Missões', href: 'minhas-missoes' }, { title: 'Todas as Missões', href: 'todas-missoes' }]);
-    const [menuMiniGames] = useState<Array<any>>([{ title: 'Jogo da Memória', href: 'memoria' }]);
-    const [menuStore] = useState<Array<any>>([{ title: 'Todos os Itens', href: 'todos-itens' }, { title: 'Obra dos Alunos', href: 'todos-itens-alunos' }]);
+    const [menuQuizzes] = useState<Array<any>>([{ title: 'Meus Quizzes', href: 'quiz/meus-quizes' }, { title: 'Todos os Quizzes', href: 'quiz/todos-quizes' }]);
+    const [menuMissions] = useState<Array<any>>([{ title: 'Minhas Missões', href: 'missoes/minhas-missoes' }, { title: 'Todas as Missões', href: 'missoes/todas-missoes' }]);
+    const [menuMiniGames] = useState<Array<any>>([{ title: 'Jogo da Memória', href: 'miniGames/memoria' }]);
+    const [menuStore] = useState<Array<any>>([{ title: 'Todos os Itens', href: 'loja-virtual/todos-itens' }, { title: 'Obra dos Alunos', href: 'loja-virtual/todos-itens-alunos' }]);
 
     const menu = (value: string) => {
         setMenuNumber(value);
@@ -23,11 +23,11 @@ export default function CircularIndeterminate() {
     return (
         <GridComponent spacing={0}>
             <ListPages title="pessoas" onClick={() => menu('')} href="/usuarios" image={users} />
-            <ListPages title="quizzes" value={menuNumber} onClick={() => menu('quizzes')} arraySubMenu={menuQuizzes} image={quizzes} href="/quiz/" />
-            <ListPages title="missões" value={menuNumber} onClick={() => menu('missões')} arraySubMenu={menuMissions} image={award} href="/missoes/" />
+            <ListPages title="quizzes" value={menuNumber} onClick={() => menu('quizzes')} arraySubMenu={menuQuizzes} image={quizzes} />
+            <ListPages title="missões" value={menuNumber} onClick={() => menu('missões')} arraySubMenu={menuMissions} image={award} />
 
-            <ListPages title="mini games" value={menuNumber} onClick={() => menu('mini games')} arraySubMenu={menuMiniGames} image={slack} href="/miniGames/" />
-            <ListPages title="loja virtual" value={menuNumber} onClick={() => menu('loja virtual')} arraySubMenu={menuStore} image={shoppingCart} href="/loja-virtual/" />
+            <ListPages title="mini games" value={menuNumber} onClick={() => menu('mini games')} arraySubMenu={menuMiniGames} image={slack} />
+            <ListPages title="loja virtual" value={menuNumber} onClick={() => menu('loja virtual')} arraySubMenu={menuStore} image={shoppingCart} />
             <ListPages title="mapa do jogo" href="/mapa-do-jogo" image={mapPin} onClick={() => menu('')} />
         </GridComponent>
     );

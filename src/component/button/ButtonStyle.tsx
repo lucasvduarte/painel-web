@@ -37,8 +37,7 @@ export const Input = styled.input`
   display: none;
 `;
 
-export const Span = styled.span` 
-  color: #009C4E;
+export const Span = styled.span`  
   font-weight: 600;
 `;
 

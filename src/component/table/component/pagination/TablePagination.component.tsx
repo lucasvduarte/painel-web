@@ -12,10 +12,10 @@ export default function TablePaginationComponent(props: Pagination) {
             rowsPerPageOptions={[10, 25]}
             component="div"
             labelRowsPerPage="Itens por pagina"
-            labelDisplayedRows={({ from, to, count }: DisplayedRows) => `${from}-${to} de ${count !== -1 ? count : ` ${to}`}`}
             count={size === rowsPerPage ? -1 : rowsPerPage * page}
             rowsPerPage={rowsPerPage}
             page={page - 1}
+            labelDisplayedRows={({ from, to, count }: DisplayedRows) => `${size + (size * (page - 1))}-${to} de ${count !== -1 ? count : ` ${to}`}`}
             onChangePage={onChangePage ? onChangePage : () => { }}
             onChangeRowsPerPage={onChangeRowsPerPage}
         />

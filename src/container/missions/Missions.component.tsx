@@ -4,22 +4,22 @@ import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
-import { getUser, deleteUser } from './User.service';
+import { getMissions, deleteMissions } from './Missions.service';
 import { toast } from "react-toastify";
-import { InterfacePagination } from './interface/UserPagination';
-import User from './interface/User';
+import { InterfacePagination } from './interface/MissionsPagination';
+import Missions from './interface/Missions';
 
-export default function UserComponent() {
+export default function MissionsComponent() {
     let history = useHistory();
-    const [user, setUser] = useState<Array<User>>([]);
+    const [missions, setMissions] = useState<Array<Missions>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(false);
 
     useEffect(() => {
-        getUser(pagination).then(res => {
+        getMissions(pagination).then(res => {
             if (res.data) {
-                setUser(res.data);
+                setMissions(res.data);
             }
         }).finally(function () {
             setRequest(false)
@@ -43,41 +43,41 @@ export default function UserComponent() {
         setOpenModalDelete(value || '');
     };
 
-    const onSubmit = (user: InterfacePagination) => {
-        //setPagination({ ...pagination, uf: user.uf, municipio: user.municipio, unidadeOperacao: user?.unidadeOperacao, dataValidacaoInicial: user.dataValidacaoInicial, meioValidacaoFinal: user.meioValidacaoFinal });
+    const onSubmit = (Missions: InterfacePagination) => {
+        //setPagination({ ...pagination, uf: Missions.uf, municipio: Missions.municipio, unidadeOperacao: Missions?.unidadeOperacao, dataValidacaoInicial: Missions.dataValidacaoInicial, meioValidacaoFinal: Missions.meioValidacaoFinal });
     };
 
-    const handleClickAction = (action: Action, user: InterfacePagination) => {
+    const handleClickAction = (action: Action, Missions: InterfacePagination) => {
         if (action === ACTION_EDIT) {
-            return history.push(`/usuario/editar-usuario/${user._id}`);
+            return history.push(`/usuario/editar-usuario/${Missions._id}`);
         }
         if (action === ACTION_DELETE) {
-            return handleClickModalDelete(user._id);
+            return handleClickModalDelete(Missions._id);
         }
         if (action === ACTION_VIEW) {
-            return history.push(`/usuario/visualizar-usuario/${user._id}`);
+            return history.push(`/usuario/visualizar-usuario/${Missions._id}`);
         }
     };
 
     const handleClickDelete = async () => {
         setRequest(true)
-        await deleteUser(openModalDelete).then(res => {
-            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteUser' });
+        await deleteMissions(openModalDelete).then(res => {
+            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteMissions' });
         }).catch(error => {
             toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
         }).finally(function () {
-            setRequest(false)
             handleClickModalDelete('');
+            setRequest(false)
         });
     };
 
     return (
-        <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adiconar Usuário" >
+        <Header namePage="Minhas Missões" link="/missoes/minhas-missoes/nova-missao" title="Adiconar Missão" >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table
                 request={request}
-                data={user}
+                data={missions}
                 headCells={HEAD_CELL}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}

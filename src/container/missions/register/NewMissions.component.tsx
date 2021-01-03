@@ -1,8 +1,8 @@
 import React from 'react';
 import { Header } from '../../../component/Component';
 import Form from '../form/Form.component';
-import User from '../interface/User';
-import { postUser } from '../User.service';
+import Missions from '../interface/Missions';
+import { postMissions } from '../Missions.service';
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
@@ -10,17 +10,17 @@ import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 export default function Register() {
     let history = useHistory();
 
-    const onSubmit = async (data: User) => {
-        await postUser(data).then(res => {
-            toast.success("Usuário foi cadastrado!", { toastId: 'sucessUser' });
-            history.push('/usuarios');
+    const onSubmit = async (data: Missions) => {
+        await postMissions(data).then(res => {
+            toast.success("Missão foi cadastrado!", { toastId: 'sucessMissions' });
+            history.push('/missoes/minhas-missoes');
         }).catch(error => {
-            toast.error("Usuário não foi cadastrado!", { toastId: error.message });
+            toast.error("Missão não foi cadastrado!", { toastId: error.message });
         });
     };
 
     return (
-        <Header namePage="Pessoas" subPage="Novo Usuário">
+        <Header namePage="Minhas Missões" subPage="Nova Missão">
             <Form handleSubmit={onSubmit} initialValues={INITIAL_VALUES} request={false} />
         </Header>
     );

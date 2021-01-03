@@ -9,6 +9,10 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+interface Props {
+    maxWidth?: number;
+}
+
 export const FormInput = styled(({ ...props }) => (
     <TextField placeholder={props.label} fullWidth inputProps={{ maxLength: 60 }} variant="outlined" {...props} />
 ))` 
@@ -68,10 +72,11 @@ export const ContainerRadio = styled.div`
     color:#5a5a5a;
 `;
 
+
 export const LabelForm = styled.p`
     margin-top: -11px; 
     text-align: left;
-    max-width: 185px;
+    max-width: ${(props: Props) => `${props.maxWidth ? props.maxWidth : 35}px`};  
     font-size: 12px;
     margin-left: 6px;
     color:#5a5a5a;

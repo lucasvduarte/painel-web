@@ -1,7 +1,7 @@
 import 'date-fns';
 import React from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { CardForm, Button, Progress, Form } from "../../../component/Component";
+import { CardAccordion, Button, Progress, Form } from "../../../component/Component";
 import { FormProps } from '../interface/Form';
 import { Grid, FormControl, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
 import User from '../interface/User';
@@ -26,7 +26,7 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
         }} validationSchema={validations} validateOnChange={false} >
             {({ values, handleChange, errors, resetForm }: FormikProps<User>) => (
                 <FormikForm>
-                    <CardForm>
+                    <CardAccordion>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={12} md={6}>
                                 <Form.FormInput
@@ -102,7 +102,7 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
                             {values.type === 'professor' && (
                                 <Grid item xs={12} sm={12} md={6}>
                                     <Form.ContainerRadio>
-                                        <Form.LabelForm>Dar permissão a esse professor ?</Form.LabelForm>
+                                        <Form.LabelForm maxWidth={185}>Dar permissão a esse professor ?</Form.LabelForm>
                                         <Form.FormRadio name='can_edit' value={values.can_edit} onChange={handleChange('can_edit')}>
                                             <Form.FormControlRadio
                                                 value={true}
@@ -121,7 +121,7 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
                         </Grid>
 
                         <Button.ButtonForm link="/usuarios" />
-                    </CardForm>
+                    </CardAccordion>
                 </FormikForm>
             )}
         </Formik>

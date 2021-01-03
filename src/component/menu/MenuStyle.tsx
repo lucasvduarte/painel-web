@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-    transition: 0.2s ease-in;
-    text-align: center;
+    transition: 0.2s ease-in; 
     margin-top: 40px;
     @media (max-width: 600px) {
         margin-top: 20px;
@@ -10,8 +9,7 @@ export const Main = styled.div`
     }
 `;
 
-export const Hearder = styled.div`
-    //background-color: #0060B8;
+export const Hearder = styled.div` 
     background: linear-gradient(180deg, #0060B8 , #58AFFF) no-repeat;
     height: 64.5px;
     width: 100%;

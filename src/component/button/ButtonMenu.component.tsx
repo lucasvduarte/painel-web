@@ -1,7 +1,6 @@
 import React, { MouseEvent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { LinkRouter } from '../link/Link';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 interface ButtomMenuInterface {
     title: string;
-    href: string;
+    href?: string;
     onClick?(e: MouseEvent<HTMLElement>): void;
     image: any;
 }
@@ -41,16 +40,14 @@ function ButtomMenu({ title, href, onClick, image }: ButtomMenuInterface) {
     const classes = useStyles();
 
     return (
-        <LinkRouter to={href} >
-            <Button variant="contained" color="primary" size="large" className={classes.root} onClick={onClick}>
-                <div className={classes.img} >
-                    <img src={image} width={80} height={80} alt="img" />
-                </div>
-                <div className={classes.text} >
-                    <span className={classes.title}> {title} </span>
-                </div>
-            </Button>
-        </LinkRouter>
+        <Button variant="contained" href={href} color="primary" size="large" className={classes.root} onClick={onClick}>
+            <div className={classes.img} >
+                <img src={image} width={80} height={80} alt="img" />
+            </div>
+            <div className={classes.text} >
+                <span className={classes.title}> {title} </span>
+            </div>
+        </Button>
     )
 }
 export default ButtomMenu;
