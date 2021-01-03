@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
-import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
+import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW, ACTION } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getMissions, deleteMissions } from './Missions.service';
 import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
+import { MissionsInterface } from './interface/MissionsComponent';
 
-export default function MissionsComponent() {
+export default function MissionsComponent({ allMissions }: MissionsInterface) {
+
     let history = useHistory();
     const [missions, setMissions] = useState<Array<Missions>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
@@ -71,14 +73,21 @@ export default function MissionsComponent() {
         });
     };
 
+    const headCell = (allMissions?: boolean) => {
+        if (allMissions && HEAD_CELL[HEAD_CELL.length - 1].id === ACTION) {
+            HEAD_CELL.pop();
+        }
+        return HEAD_CELL;
+    }
+
     return (
-        <Header namePage="Minhas Missões" link="/missoes/minhas-missoes/nova-missao" title="Adiconar Missão" >
+        <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title={`${allMissions ? '' : 'Adiconar Missão'}`} >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table
                 request={request}
                 data={missions}
-                headCells={HEAD_CELL}
+                headCells={headCell(allMissions)}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}
                 order={pagination.asc === 1 ? 'asc' : 'desc'}

@@ -22,6 +22,7 @@ export const INITIAL_VALUES: Missions = {
 }
 
 export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
+    _user: '',
     name: '',
     description: '',
     end_message: '',

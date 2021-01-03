@@ -16,7 +16,7 @@ export default function Hearder({ namePage, subPage, link, title, children }: Pr
 
     return (
         <ContainerResponsive>
-            <ContainerResponsive>
+            <ContainerResponsive marginBottom={!title ? 30 : 0}>
                 <Grid justify="flex-start" alignItems="center">
                     {namePage && <NamePage>{namePage}</NamePage>}
                     {subPage && <SubPage>{subPage}</SubPage>}
