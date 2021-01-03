@@ -20,7 +20,7 @@ export default function SimpleAccordion({ children, title }: Props) {
     };
 
     return (
-        <Accordion expanded={expanded === title} onChange={handleChange(title)}>
+        <Accordion expanded={expanded === title} onChange={handleChange(title)} style={{ borderRadius: 12 }}>
             <AccordionSummary aria-controls={`${title}-controls`} id={title}>
                 {title}
                 {expanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}

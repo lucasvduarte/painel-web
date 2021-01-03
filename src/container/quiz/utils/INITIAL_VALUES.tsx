@@ -1,31 +1,29 @@
-import { InterfacePagination } from '../interface/MissionsPagination';
+import { InterfacePagination } from '../interface/QuizzesPagination';
 import { INITIAL_PAGINATION } from '../../../component/table/component/pagination/utils/Pagination';
-import Missions from '../interface/Missions';
+import Quizzes from '../interface/Quizzes';
 
-export const INITIAL_VALUES: Missions = {
-    name: '',
+export const INITIAL_VALUES: Quizzes = {
+    title: '',
     description: '',
-    end_message: '',
     lux: 0,
     resources: 0,
     start_time: new Date(),
     end_time: new Date(),
     is_public: true,
-    is_grupal: false,
     single_answer: true,
-    has_image: false,
-    has_video: false,
-    has_text: false,
-    has_audio: false,
-    has_geolocation: false,
-    isEntrepreneurial: false,
+    alternative_a: '',
+    alternative_b: '',
+    alternative_c: '',
+    alternative_d: '',
+    alternative_e: '',
+    correct_answer: ''
 }
 
 export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
     _user: '',
-    name: '',
+    title: '',
     description: '',
-    end_message: '',
+    secret_code: '',
     lux: 0,
     resources: 0,
     limit: INITIAL_PAGINATION.limit,

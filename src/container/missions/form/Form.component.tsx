@@ -10,7 +10,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 
-const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
+const FormMissions = ({ handleSubmit, initialValues, request }: FormProps) => {
 
     if (request) {
         return <Progress open={request} />
@@ -272,4 +272,4 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
         </Formik>
     )
 }
-export default FormPerson;
+export default FormMissions;
