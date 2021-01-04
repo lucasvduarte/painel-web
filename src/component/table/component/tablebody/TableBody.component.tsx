@@ -47,7 +47,7 @@ function TableBodyComponent(props: TableBodyProps) {
 
     const rowList: Array<HeadCell> = createRow([...headCells]);
 
-    const action: boolean = [...headCells][headCells.length - 1].id === 'action';
+    const action: boolean = [...headCells][headCells.length - 1].id === ACTION;
 
     const viewAttribute = (obj: any, attribute: string): string => {
         return obj[attribute];
