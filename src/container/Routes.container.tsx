@@ -4,6 +4,7 @@ import user from './person/User.container';
 import { Menu } from '../component/Component';
 import Missions from './missions/Missions.container';
 import Quizzes from './quiz/Quizzes.container';
+import MiniGames from './miniGames/MiniGames.container';
 
 const Routes = () => {
     return (
@@ -12,6 +13,7 @@ const Routes = () => {
             <Route path="/usuarios" component={user} />
             <Route path="/missoes/" component={Missions} />
             <Route path="/quizzes/" component={Quizzes} />
+            <Route path="/minigames/" component={MiniGames} />
         </Switch>
     );
 };

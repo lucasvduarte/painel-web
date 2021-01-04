@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
@@ -26,7 +26,7 @@ export default function UserComponent() {
         });
     }, [pagination, request]);
 
-    const handleRequestSort = (event: React.MouseEvent<unknown>, property: string) => {
+    const handleRequestSort = (event: MouseEvent<unknown>, property: string) => {
         const isAsc = pagination.sort === property && pagination.asc === 1;
         setPagination({ ...pagination, sort: property, asc: isAsc ? -1 : 1 });
     };
@@ -35,7 +35,7 @@ export default function UserComponent() {
         setPagination({ ...pagination, page: newPage + 1 });
     };
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
         setPagination({ ...pagination, limit: +event.target.value, page: 1 });
     };
 

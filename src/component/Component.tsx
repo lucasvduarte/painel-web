@@ -24,6 +24,7 @@ import CardAccordionC from './card/CardAccordion.component';
 import { SpanStyled } from './span/SpanStyle';
 import ButtonHome from './button/ButtonHome.component';
 import MenuPages from './menu/Menu.component';
+import { Image } from './img/Img';
 
 export const Menu = { Drawer, AppBar, ToolBar, Main, MenuPages, Hearder };
 export const Container = ContainerStyled;
@@ -40,3 +41,4 @@ export const HeaderRegister = HeaderRegisterC;
 export const FieldSignaling = MandatoryFieldSignaling;
 export const Tabs = Tab;
 export const Span = SpanStyled;
+export const Img = Image;

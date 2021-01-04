@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import AttachmentIcon from '@material-ui/icons/Attachment';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { Input, Span, ButtonStyle } from './ButtonStyle';
 import { ContainerStyled } from '../container/Container'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Grid from '../grid/GridComponent.component';
 
 interface Props {
-    onChange(event: React.ChangeEvent<HTMLInputElement>): void;
+    onChange(event: ChangeEvent<HTMLInputElement>): void;
     disabled?: boolean;
     fileName?: string;
     onClick?: ((event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void) | undefined;
@@ -16,20 +16,21 @@ interface Props {
 export default function UploadButtons({ onChange, disabled, fileName, onClick }: Props) {
 
     return (
-        <ContainerStyled marginTop={15} marginLeft={5}>
+        <ContainerStyled marginTop={-25} marginLeft={5}>
             <Grid justify="flex-start" alignItems="center">
-                <Span>Incluir Anexos</Span>
+                <Span>Incluir Imagens</Span>
                 <Input
                     onChange={onChange}
-                    accept=".pdf, .ppt, .xlsx, .docx"
+                    accept="image/*"
                     name="anexo"
                     id="icon-button-file"
                     type="file"
                     disabled={disabled}
+                    multiple
                 />
                 <label htmlFor="icon-button-file" >
                     <IconButton color="primary" aria-label="upload picture" component="span" disabled={disabled}>
-                        <AttachmentIcon />
+                        <PhotoCamera />
                     </IconButton>
                 </label>
                 <span>{fileName}</span>
