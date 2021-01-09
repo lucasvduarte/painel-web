@@ -12,6 +12,10 @@ export const getByMissions = (id: string) => {
     return http.get<Missions>(`${URL}${id}`)
 }
 
+export const getByMissionsStatus = (id: string, params?: any) => {
+    return http.get<Array<Missions>>(`${URL}${id}/answers`, { params: params })
+}
+
 export const postMissions = (missions: Missions) => {
     return http.post<Missions>(`${URL}/register/`, missions)
 }

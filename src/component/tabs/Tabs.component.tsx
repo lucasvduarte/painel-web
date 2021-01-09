@@ -1,11 +1,11 @@
 import React, { ReactNode, Children, useState, ChangeEvent, useLayoutEffect } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { ContainerResponsive } from '../container/Container';
+import { ContainerTabs } from './TabsStyled';
 import { TabInterface } from './TabsInterface';
 import TabPanel from './TabPanel.component';
 
-export default function CenteredTabs({ nameTabs, children, disabled }: TabInterface) {
+export default function CenteredTabs({ tabValue, nameTabs, children, disabled }: TabInterface) {
     const [value, setValue] = useState(0);
     const [open, setOpen] = useState<boolean>(true);
 
@@ -19,14 +19,17 @@ export default function CenteredTabs({ nameTabs, children, disabled }: TabInterf
         return () => window.removeEventListener('resize', updateSize);
     }, []);
 
-    const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
+    const handleChange = (_event: ChangeEvent<{}>, newValue: number) => {
+        if (tabValue) {
+            tabValue(newValue)
+        }
         setValue(newValue);
     };
 
     const childrenList: Array<ReactNode> = Children.toArray(children);
 
     return (
-        <ContainerResponsive marginLeft={50} marginRight={50}  >
+        <ContainerTabs>
             <Tabs
                 value={value}
                 onChange={handleChange}
@@ -49,6 +52,6 @@ export default function CenteredTabs({ nameTabs, children, disabled }: TabInterf
                     </TabPanel>
                 )
             })}
-        </ContainerResponsive>
+        </ContainerTabs>
     );
 }

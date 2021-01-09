@@ -8,13 +8,9 @@ export default function View() {
 
     return (
         <Tabs nameTabs={['Ver Grafico', 'Ver Respostas']} >
-            <Header>
-                <AnswersChart />
-            </Header>
+            <AnswersChart />
 
-            <Header>
-                <Answers />
-            </Header>
+            <Answers />
         </Tabs>
     );
 }

@@ -19,7 +19,7 @@ const TabPanel = (props: TabPanelProps) => {
             {...other}
         >
             {value === index && (
-                <ContainerResponsive marginBottom={30}>
+                <ContainerResponsive marginTop={30} marginBottom={30} marginLeft={10} marginRight={10}>
                     {children}
                 </ContainerResponsive>
             )}
