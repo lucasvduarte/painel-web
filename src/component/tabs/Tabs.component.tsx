@@ -1,40 +1,11 @@
 import React, { ReactNode, Children, useState, ChangeEvent, useLayoutEffect } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { PaperStyle, Container } from './TabsStyle';
+import { ContainerResponsive } from '../container/Container';
+import { TabInterface } from './TabsInterface';
+import TabPanel from './TabPanel.component';
 
-interface TabPanelProps {
-    children?: ReactNode;
-    index: number;
-    value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`scrollable-auto-tabpanel-${index}`}
-            aria-labelledby={`scrollable-auto-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Container>
-                    {children}
-                </Container>
-            )}
-        </div>
-    );
-}
-
-interface Props {
-    nameTabs: Array<string>;
-    children: ReactNode;
-}
-
-export default function CenteredTabs({ nameTabs, children }: Props) {
+export default function CenteredTabs({ nameTabs, children, disabled }: TabInterface) {
     const [value, setValue] = useState(0);
     const [open, setOpen] = useState<boolean>(true);
 
@@ -55,18 +26,19 @@ export default function CenteredTabs({ nameTabs, children }: Props) {
     const childrenList: Array<ReactNode> = Children.toArray(children);
 
     return (
-        <PaperStyle>
+        <ContainerResponsive marginLeft={50} marginRight={50}  >
             <Tabs
                 value={value}
                 onChange={handleChange}
-                indicatorColor="primary"
+                indicatorColor="secondary"
                 variant={open ? "fullWidth" : "scrollable"}
-                textColor="primary"
+                textColor="inherit"
                 scrollButtons="on"
                 centered={open ? true : false}
+                style={{ color: 'white' }}
             >
                 {nameTabs.map((tabs: string, index: number) => {
-                    return <Tab label={tabs} key={index} />
+                    return <Tab label={tabs} key={index} disabled={disabled?.length ? disabled.some((elem: number) => elem === index + 1) : false} style={{ fontSize: 20 }} />
                 })}
             </Tabs>
 
@@ -77,6 +49,6 @@ export default function CenteredTabs({ nameTabs, children }: Props) {
                     </TabPanel>
                 )
             })}
-        </PaperStyle>
+        </ContainerResponsive>
     );
 }

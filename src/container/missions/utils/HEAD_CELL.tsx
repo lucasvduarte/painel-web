@@ -8,3 +8,10 @@ export const HEAD_CELL: Array<HeadCell> = [
     { id: 'resources', label: 'resources' },
     { id: ACTION, label: 'Ação' },
 ];
+
+
+export const HEAD_CELL_MISSIOES: Array<HeadCell> = [
+    { id: 'name', label: 'Name' },
+    { id: 'date', label: 'Data de submissão' },
+    { id: ACTION, label: 'Ação' },
+];

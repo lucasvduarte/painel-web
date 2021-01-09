@@ -10,7 +10,7 @@ const Routes = () => {
         <Switch>
             <Route exact path="/usuarios" component={User} />
             <Route exact path="/usuarios/novo-usuario" component={Register} />
-            <Route exact path="/usuarios/editar-usuario" component={Edit} />
+            <Route exact path="/usuarios/editar-usuario/:id" component={Edit} />
         </Switch>
     );
 

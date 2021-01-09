@@ -9,9 +9,12 @@ type Props = {
 export const PaperComponent = styled(({ ...props }) => (
     <Paper {...props} />
 ))`
-    width: 100%;
-    margin-bottom: 20px;
-    min-width: 150px;
+   &&{
+        width: 100%;
+        margin-bottom: 20px;
+        min-width: 150px;
+        border-radius: 12px;
+    }
 `;
 
 export const Span = styled.span`
