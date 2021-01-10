@@ -9,11 +9,9 @@ export default function QuizzesComponent() {
     const [quizzes, setQuizzes] = useState<Array<any>>([]);
 
     return (
-        <Header>
-            <Table
-                data={quizzes}
-                headCells={HEAD_CELL_ANSWERS}
-            />
-        </Header>
+        <Table
+            data={quizzes}
+            headCells={HEAD_CELL_ANSWERS}
+        />
     );
 }

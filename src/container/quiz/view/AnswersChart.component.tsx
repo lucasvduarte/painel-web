@@ -1,19 +1,55 @@
 import React, { useState } from 'react';
-import { Header, Table } from '../../../component/Component';
-import { HEAD_CELL_ANSWERS } from '../utils/HEAD_CELL';
-import { useHistory } from "react-router-dom";
+import {
+    BarChart, Bar, Cell, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend, CartesianGrid
+} from 'recharts';
 
-export default function QuizzesComponent() {
+const data = [
+    {
+        name: 'Page A', uv: 4000,
+    },
+    {
+        name: 'Page B', uv: 3000,
+    },
+    {
+        name: 'Page C', uv: 2000,
+    },
+    {
+        name: 'Page D', uv: 2780,
+    },
+    {
+        name: 'Page E', uv: 1890,
+    },
+];
 
-    let history = useHistory();
-    const [quizzes, setQuizzes] = useState<Array<any>>([]);
+export default function Grafico() {
+
+    const [test, setTest] = useState<any>({
+        data: data, activeIndex: 2
+    });
 
     return (
-        <Header>
-            <Table
-                data={quizzes}
-                headCells={HEAD_CELL_ANSWERS}
-            />
-        </Header>
+        <div style={{ width: '100%', height: 400 }}>
+            <ResponsiveContainer width='100%'>
+                <BarChart
+                    data={test.data}
+                    margin={{
+                        top: 5, right: 0, left: 0, bottom: 5,
+                    }}
+                >
+                    <XAxis dataKey="name" />
+                    <YAxis tickCount={6} />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="uv" fill="red" name="Respostas Erradas">
+                        {
+                            data.map((entry: any, index: number) => (
+                                <Cell cursor="pointer" fill={index === test.activeIndex ? 'green' : 'red'} key={`cell-${index}`} />
+                            ))
+                        }
+                    </Bar>
+                    <Bar dataKey="values" fill="green" name="Respostas Corretas" />
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
     );
 }

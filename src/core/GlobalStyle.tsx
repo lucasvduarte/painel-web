@@ -27,4 +27,8 @@ export const GlobalStyle = createGlobalStyle`
   .MuiInputBase-formControl {
     background: #FFFFFF;
   }
+
+   .recharts-tooltip-cursor {
+    fill: rgba(0,0,0,0)
+  }
 `;
