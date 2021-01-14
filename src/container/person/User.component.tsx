@@ -17,7 +17,7 @@ export default function UserComponent() {
     const [request, setRequest] = useState(false);
 
     useEffect(() => {
-        getUser(pagination).then(res => {
+        getUser().then(res => {
             if (res.data) {
                 setUser(res.data);
             }

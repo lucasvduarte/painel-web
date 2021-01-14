@@ -2,9 +2,8 @@ export const TOKEN_KEY = "authToken";
 
 export const isAuthenticated = () => {
   const json: any = localStorage.getItem(TOKEN_KEY) || 'null';
-  const obj: any = JSON.parse(JSON.stringify(json));
-  console.log(obj)
-  return false;
+  const obj: any = JSON.parse(json);
+  return !!obj.token;
 };
 
 export const getToken = () => {

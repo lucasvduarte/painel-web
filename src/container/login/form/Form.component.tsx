@@ -1,7 +1,7 @@
 import 'date-fns';
 import React from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { Button, Progress, Form, CardAccordion, Img } from "../../../component/Component";
+import { Button, Progress, Form } from "../../../component/Component";
 import { FormProps } from '../interface/Form';
 import { Grid } from '@material-ui/core';
 import Login from '../interface/Login';

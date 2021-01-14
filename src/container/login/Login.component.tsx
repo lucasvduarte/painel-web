@@ -15,11 +15,12 @@ export default function LoginComponent() {
 
     let history = useHistory();
     const [request, setRequest] = useState(false);
+    const [user, setUser] = useState<Login>(INITIAL_VALUES);
 
-    const onSubmit = async (data: Login) => {
+    const onSubmit = async (user: Login) => {
         setRequest(true);
-        console.log(data)
-        await postLogin(data).then(res => {
+        setUser(user)
+        await postLogin(user).then(res => {
             login(res.data)
             history.push("/")
         }).catch(error => {
@@ -35,7 +36,7 @@ export default function LoginComponent() {
                 <Grid item xs={12}>
                     <Card>
                         <Img src={logo} alt="logo" />
-                        <FormLogin handleSubmit={onSubmit} initialValues={INITIAL_VALUES} />
+                        <FormLogin handleSubmit={onSubmit} initialValues={user} request={request} />
                     </Card>
                 </Grid>
             </Header>
