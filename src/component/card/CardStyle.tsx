@@ -7,10 +7,10 @@ export const CardC = styled(({ ...props }) => (
 ))` 
    && { 
         border-radius: 12px;
-        padding: 30px 20px 0px 20px;
+        padding: 30px 20px 10px 20px;
         transition: 0.2s ease-in;
         @media (max-width: 600px) {
-            padding: 30px 10px 0px 10px;
+            padding: 30px 10px 10px 10px;
             transition: 0.2s ease-in;
         }
     }

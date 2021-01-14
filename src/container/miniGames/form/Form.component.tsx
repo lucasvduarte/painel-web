@@ -4,7 +4,7 @@ import { Formik, Form as FormikForm, FormikProps } from 'formik';
 import { Button, Progress, Form, CardAccordion, Img } from "../../../component/Component";
 import { FormProps } from '../interface/Form';
 import { Grid } from '@material-ui/core';
-import Missions from '../interface/MiniGames';
+import MiniGames from '../interface/MiniGames';
 import { Validate } from '../utils/Validate';
 
 const FormMiniGames = ({ handleSubmit, initialValues, request, handleChangeImages, images }: FormProps) => {
@@ -14,10 +14,10 @@ const FormMiniGames = ({ handleSubmit, initialValues, request, handleChangeImage
     }
 
     return (
-        <Formik initialValues={initialValues} onSubmit={async (values: Missions) => {
+        <Formik initialValues={initialValues} onSubmit={async (values: MiniGames) => {
             await handleSubmit(values);
         }} validationSchema={Validate} validateOnChange={false} >
-            {({ values, handleChange, errors, setFieldValue }: FormikProps<Missions>) => (
+            {({ values, handleChange, errors, setFieldValue }: FormikProps<MiniGames>) => (
                 <FormikForm>
                     <CardAccordion>
                         <Grid container spacing={3}>

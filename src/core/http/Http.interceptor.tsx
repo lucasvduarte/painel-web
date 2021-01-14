@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { getToken } from "../auth/auth";
 
 const TIMEOUT_ERROR_MESSAGE = 'timeoutErrorMessage';
 
@@ -12,6 +13,10 @@ let instance = axios.create({
 
 instance.interceptors.request.use(
 	async (config) => {
+		const token = getToken();
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
 		return config;
 	},
 	(err) => {
