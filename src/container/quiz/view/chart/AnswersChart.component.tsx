@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
     BarChart, Bar, Cell, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend, CartesianGrid
 } from 'recharts';
-import { getAnalyticsChoices } from '../Quizzes.service';
+import { getAnalyticsChoices } from '../../Quizzes.service';
 import { useParams } from "react-router";
-import ParamTypes from '../../../core/interfaces/ParamTypes';
-import { Progress } from "../../../component/Component";
+import ParamTypes from '../../../../core/interfaces/ParamTypes';
+import { Progress } from "../../../../component/Component";
+import format from './Format';
 
 export default function Grafico() {
     let { id } = useParams<ParamTypes>();
@@ -20,31 +21,6 @@ export default function Grafico() {
             setRequest(false);
         });
     }, [id]);
-
-    const format = (data: any) => {
-        const answers: any = data.answers;
-        let array: Array<any> = [];
-        Object.keys(answers).forEach(function (item) {
-            let newObject: Object = { name: item.toUpperCase(), markedQuantity: answers[item] }
-            array.push(newObject);
-        });
-        const newObject = { answers: array, correctAnswer: correctAnswer(data.correctAnswer) };
-        return newObject;
-    }
-
-    const correctAnswer = (correctAnswer: string) => {
-        let value: number = 0;
-        if (correctAnswer === 'b') {
-            value = 1;
-        } else if (correctAnswer === 'c') {
-            value = 2;
-        } else if (correctAnswer === 'd') {
-            value = 3;
-        } else {
-            value = 4;
-        }
-        return value;
-    }
 
     if (request) {
         return <Progress open={request} />
@@ -65,13 +41,14 @@ export default function Grafico() {
                     <YAxis tickCount={6} />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="markedQuantity" fill="red" name="Respostas Erradas"  >
+                    <Bar dataKey="markedQuantity" stackId="a" fill="red" name="Respostas Erradas" >
                         {
                             data.answers.map((entry: any, index: number) => (
                                 <Cell cursor="pointer" fill={index === data.correctAnswer ? 'green' : 'red'} key={`cell-${index}`} />
                             ))
                         }
                     </Bar>
+                    <Bar dataKey="values" stackId="a" fill="green" name="Resposta Certa" />
                 </BarChart>
             </ResponsiveContainer>
 
