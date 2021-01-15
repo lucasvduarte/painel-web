@@ -8,7 +8,7 @@ import { TableBodyProps } from './interface/TableBody';
 import { HeadCell } from '../../interfaces/TableInterface';
 import { ValueEdit } from './interface/ValueEdit';
 import { createRow } from './component/CreateRow';
-//import { FormatDate } from '../../../../utils/format/FormatDate';
+import formatValues from './format/FormatValues';
 import ActionButton from './component/ActionButton.component';
 
 function TableBodyComponent(props: TableBodyProps) {
@@ -63,15 +63,8 @@ function TableBodyComponent(props: TableBodyProps) {
                 <TableRow key={`TableRow-${index}`}>
                     {rowList.map((keys: HeadCell, indexKeys: number) => {
                         let actionRow: boolean = !!actionColumns && actionColumns === indexKeys + 1;
-                        let value: string = row[keys.id];
 
-                        if (keys.format?.includes('date')) {
-                            value = ''//FormatDate(row[keys.id])
-                        }
-
-                        if (keys.viewAttribute) {
-                            value = viewAttribute(row[keys.id], keys.viewAttribute);
-                        }
+                        let value: string = formatValues(keys, row[keys.id], row);
 
                         if (editable && index === newValue.index) {
                             return (

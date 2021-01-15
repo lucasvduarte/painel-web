@@ -53,7 +53,6 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
                                     label='Senha'
                                     name='password'
                                     type="password"
-                                    value={values.password}
                                     onChange={handleChange('password')}
                                     error={(values.password.length < 6) && !!errors.password}
                                     helperText={(values.password.length < 6) && errors.password}
@@ -66,8 +65,8 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
                                     type="password"
                                     value={values.confirmPassword}
                                     onChange={handleChange('confirmPassword')}
-                                    error={(values.confirmPassword.length < 6) && !!errors.confirmPassword}
-                                    helperText={(values.confirmPassword.length < 6) && errors.confirmPassword}
+                                    error={!!errors.confirmPassword}
+                                    helperText={errors.confirmPassword}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} >

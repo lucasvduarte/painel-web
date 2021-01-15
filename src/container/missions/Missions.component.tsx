@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
-import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW, ACTION } from '../../component/table/interfaces/TableInterface';
+import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getMissions, deleteMissions } from './Missions.service';
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
 import { MissionsInterface } from './interface/MissionsComponent';
+import { getToken } from "../../core/auth/auth";
 
 export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
@@ -16,10 +17,13 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     const [missions, setMissions] = useState<Array<Missions>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
-    const [request, setRequest] = useState(false);
+    const [request, setRequest] = useState(true);
 
     useEffect(() => {
-        getMissions(pagination).then(res => {
+        const user = {
+            _user: getToken()._id
+        }
+        getMissions((!allMissions ? user : undefined)).then(res => {
             if (res.data) {
                 setMissions(res.data);
             }
@@ -51,34 +55,26 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
     const handleClickAction = (action: Action, Missions: InterfacePagination) => {
         if (action === ACTION_EDIT) {
-            return history.push(`/usuario/editar-usuario/${Missions._id}`);
+            return history.push(`/missoes/minhas-missoes/editar-missao/${Missions._id}`);
         }
         if (action === ACTION_DELETE) {
             return handleClickModalDelete(Missions._id);
         }
         if (action === ACTION_VIEW) {
-            return history.push(`/usuario/visualizar-usuario/${Missions._id}`);
+            return history.push(`/missoes/${allMissions ? 'todas-missoes' : 'minhas-missoes'}/visualizar-missao/${Missions._id}`);
         }
     };
 
     const handleClickDelete = async () => {
-        setRequest(true)
         await deleteMissions(openModalDelete).then(res => {
             toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteMissions' });
         }).catch(error => {
             toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
         }).finally(function () {
+            setRequest(true);
             handleClickModalDelete('');
-            setRequest(false)
         });
     };
-
-    const headCell = (allMissions?: boolean) => {
-        if (allMissions && HEAD_CELL[HEAD_CELL.length - 1].id === ACTION) {
-            HEAD_CELL.pop();
-        }
-        return HEAD_CELL;
-    }
 
     return (
         <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title={`${allMissions ? '' : 'Adiconar Missão'}`} >
@@ -87,11 +83,13 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
             <Table
                 request={request}
                 data={missions}
-                headCells={headCell(allMissions)}
+                headCells={HEAD_CELL}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}
                 order={pagination.asc === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
+                noActionDelete={allMissions}
+                noActionEdit={allMissions}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onRequestSort={handleRequestSort}

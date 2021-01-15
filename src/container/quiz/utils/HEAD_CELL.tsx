@@ -10,9 +10,9 @@ export const HEAD_CELL: Array<HeadCell> = [
 
 
 export const HEAD_CELL_ANSWERS: Array<HeadCell> = [
-    { id: 'user', label: 'Usuário' },
-    { id: 'lux', label: 'Título do quiz' },
-    { id: 'resources', label: 'Opção marcada' },
-    { id: 'secret_code', label: 'Opção correta' },
+    { id: '_user', label: 'Usuário', viewAttribute: 'name' },
+    { id: '_quiz', label: 'Título do quiz', viewAttribute: 'title' },
+    { id: 'answer', label: 'Opção marcada' },
+    { id: 'approved', label: 'Opção correta', viewAttributeBoolean: { primaryLabel: 'Aprovado', secundaryLabel: 'Reprovado' } },
     { id: ACTION, label: 'Ação' },
 ]; 

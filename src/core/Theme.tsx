@@ -7,8 +7,8 @@ const theme = createMuiTheme({
             paper: "#fff"
         },
         common: {
-            black: "#bcbcbcbc",
-            white: "#bcbcbcbc"
+            black: "#ffffff",
+            white: "#ffffff"
         },
         primary: {
             contrastText: "#ffffff",

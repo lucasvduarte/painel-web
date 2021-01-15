@@ -26,8 +26,6 @@ export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
     name: '',
     description: '',
     end_message: '',
-    lux: 0,
-    resources: 0,
     limit: INITIAL_PAGINATION.limit,
     page: INITIAL_PAGINATION.page,
     sort: INITIAL_PAGINATION.sort,

@@ -4,7 +4,7 @@ import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
-import { getMiniGames, deleteMiniGames } from './MiniGames.service';
+import { getMiniGamesMemories, deleteMiniGamesMemories } from './MiniGames.service';
 import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/MiniGamesPagination';
 import MiniGames from './interface/MiniGames';
@@ -18,7 +18,7 @@ export default function MiniGamesComponent() {
     const [request, setRequest] = useState(false);
 
     useEffect(() => {
-        getMiniGames(pagination).then(res => {
+        getMiniGamesMemories().then(res => {
             if (res.data) {
                 setMiniGames(res.data);
             }
@@ -59,8 +59,8 @@ export default function MiniGamesComponent() {
 
     const handleClickDelete = async () => {
         setRequest(true)
-        await deleteMiniGames(openModalDelete).then(res => {
-            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteMiniGames' });
+        await deleteMiniGamesMemories(openModalDelete).then(res => {
+            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteMiniGamesMemories' });
         }).catch(error => {
             toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
         }).finally(function () {

@@ -3,7 +3,7 @@ import { Header } from '../../../component/Component';
 import Form from '../form/Form.component';
 import MiniGames from '../interface/MiniGames';
 import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
-import { postMiniGames } from '../MiniGames.service';
+import { postMiniGamesMemories } from '../MiniGames.service';
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
@@ -48,7 +48,7 @@ export default function RegisterMiniGames() {
         }
     */
     const onSubmit = async (data: MiniGames) => {
-        await postMiniGames(data).then(res => {
+        await postMiniGamesMemories(data).then(res => {
             toast.success("MiniGames foi cadastrado!", { toastId: 'sucessMiniGames' });
             history.push('/minigames/memoria');
         }).catch(error => {

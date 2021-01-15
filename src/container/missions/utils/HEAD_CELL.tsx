@@ -11,7 +11,7 @@ export const HEAD_CELL: Array<HeadCell> = [
 
 
 export const HEAD_CELL_MISSIOES: Array<HeadCell> = [
-    { id: 'name', label: 'Name' },
-    { id: 'date', label: 'Data de submissão' },
+    { id: '_user', label: 'Nome', viewAttribute: 'name' },
+    { id: 'created_at', label: 'Data de submissão', format: ['date'] },
     { id: ACTION, label: 'Ação' },
 ];

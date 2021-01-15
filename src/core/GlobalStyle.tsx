@@ -24,11 +24,17 @@ export const GlobalStyle = createGlobalStyle`
   .Toastify__toast--error {
     background: #FF0000;
   }
+
   .MuiInputBase-formControl {
     background: #FFFFFF;
   }
 
-   .recharts-tooltip-cursor {
+  .recharts-tooltip-cursor {
     fill: rgba(0,0,0,0)
   }
+
+  line, .recharts-text {
+    stroke: #FFFFFF;
+  }
+  
 `;

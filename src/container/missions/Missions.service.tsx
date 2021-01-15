@@ -2,18 +2,18 @@ import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
 
-const URL: string = 'missions/';
+const URL: string = 'missions';
 
-export const getMissions = (params?: InterfacePagination) => {
+export const getMissions = (params?: any) => {
     return http.get<Array<Missions>>(URL, { params: params })
 }
 
 export const getByMissions = (id: string) => {
-    return http.get<Missions>(`${URL}${id}`)
+    return http.get<Missions>(`${URL}/${id}`)
 }
 
 export const getByMissionsStatus = (id: string, params?: any) => {
-    return http.get<Array<Missions>>(`${URL}${id}/answers`, { params: params })
+    return http.get<Array<Missions>>(`${URL}/${id}/answers`, { params: params })
 }
 
 export const postMissions = (missions: Missions) => {
@@ -25,5 +25,5 @@ export const deleteMissions = (id: string) => {
 }
 
 export const putMissions = (missions: Missions) => {
-    return http.put<Missions>(`${URL}${missions._id}`, missions)
+    return http.put<Missions>(`${URL}/${missions._id}`, missions)
 }

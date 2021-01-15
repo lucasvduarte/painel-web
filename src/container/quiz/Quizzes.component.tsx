@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/QuizzesPagination';
 import Quizzes from './interface/Quizzes';
 import { QuizzesInterface } from './interface/QuizzesComponent';
+import { getToken } from '../../core/auth/auth';
 
 export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
@@ -16,10 +17,13 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     const [quizzes, setQuizzes] = useState<Array<Quizzes>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
-    const [request, setRequest] = useState(false);
+    const [request, setRequest] = useState(true);
 
     useEffect(() => {
-        getQuizzes(pagination).then(res => {
+        const user = {
+            _user: getToken()._id
+        }
+        getQuizzes((!allQuizzes ? user : undefined)).then(res => {
             if (res.data) {
                 setQuizzes(res.data);
             }
@@ -51,34 +55,26 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
     const handleClickAction = (action: Action, quizzes: InterfacePagination) => {
         if (action === ACTION_EDIT) {
-            return history.push(`/quizzes/editar-quiz/${quizzes._id}`);
+            return history.push(`/quizzes/meus-quizzes/editar-quiz/${quizzes._id}`);
         }
         if (action === ACTION_DELETE) {
             return handleClickModalDelete(quizzes._id);
         }
         if (action === ACTION_VIEW) {
-            return history.push(`/quizzes/visualizar-quiz/${quizzes._id}`);
+            return history.push(`/quizzes/${!allQuizzes ? 'meus-quizzes' : 'todos-quizzes'}/visualizar-quiz/${quizzes._id}`);
         }
     };
 
     const handleClickDelete = async () => {
-        setRequest(true)
         await deleteQuizzes(openModalDelete).then(res => {
             toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteQuizzes' });
         }).catch(error => {
             toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
         }).finally(function () {
+            setRequest(true);
             handleClickModalDelete('');
-            setRequest(false)
         });
     };
-
-    const headCell = (allQuizzes?: boolean) => {
-        if (allQuizzes && HEAD_CELL[HEAD_CELL.length - 1].id === ACTION) {
-            HEAD_CELL.pop();
-        }
-        return HEAD_CELL;
-    }
 
     return (
         <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title={`${allQuizzes ? '' : 'Adiconar Quiz'}`} >
@@ -87,8 +83,10 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
             <Table
                 request={request}
                 data={quizzes}
-                headCells={headCell(allQuizzes)}
+                headCells={HEAD_CELL}
                 page={pagination.page}
+                noActionEdit={allQuizzes}
+                noActionDelete={allQuizzes}
                 rowsPerPage={pagination.limit}
                 order={pagination.asc === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
