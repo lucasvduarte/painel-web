@@ -1,3 +1,3 @@
-export interface Status {
+export type Status = {
     status: 'Pendente' | 'Aprovado' | 'Rejeitado'
 }

@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import Login from './Login';
 
 export interface FormProps {

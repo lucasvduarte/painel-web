@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, #58AFFF 5.21%, #0060B8 72.4%) no-repeat;
-    min-height: 100vh; 
+    min-height: 115vh; 
   }
 
   code {
@@ -35,6 +35,37 @@ export const GlobalStyle = createGlobalStyle`
 
   line, .recharts-text {
     stroke: #FFFFFF;
+  }
+
+  .gm-style .gm-style-iw-c {
+    padding: 0 !important;
+    transition: 0.2s ease-in;
+    @media (max-width: 500px) { 
+      transition: 0.2s ease-in;
+      max-width: 350px !important;
+    }
+
+    @media (max-width: 400px) { 
+      transition: 0.2s ease-in;
+      max-width: 280px !important;
+    }
+  }
+
+  div.gm-style-iw-c button {
+    background-color: #ffffff !important;
+    margin-right: 5px !important;
+    margin-top: 5px !important; 
+  }
+
+  .gmnoprint .gm-style-mtc div {
+    background-color: rgb(88, 175, 255)  !important;
+    color: #ffffff !important;
+    width: 100px !important;
+  }
+
+  .gm-style button,.gm-svpc {
+    background-color: rgba(88, 175, 255)  !important;
+    color: #ffffff !important;
   }
   
 `;
