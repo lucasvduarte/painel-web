@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Paper from '@material-ui/core/Paper';
-
+import TableContainer from '@material-ui/core/TableContainer';
 type Props = {
     marginLeft?: number;
 }
@@ -9,10 +9,18 @@ type Props = {
 export const PaperComponent = styled(({ ...props }) => (
     <Paper {...props} />
 ))`
-   &&{
+   && {
         width: 100%;
         margin-bottom: 20px;
         min-width: 150px;
+        border-radius: 12px;
+    }
+`;
+
+export const TableContainerStyled = styled(({ ...props }) => (
+    <TableContainer {...props} />
+))`
+   && {
         border-radius: 12px;
     }
 `;

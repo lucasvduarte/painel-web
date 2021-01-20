@@ -18,14 +18,17 @@ type User = {
 
 export default interface MissionsStatusInterface {
     _id?: string;
-    audio: string;
+    image?: string;
+    text_msg?: string;
+    audio?: string;
+    video?: string;
+    location_lat?: string;
+    location_lng?: string;
     created_at: string;
     imp: number;
-    location_lat: string;
-    location_lng: string;
     people: number;
     status: Status;
-    text_msg: string;
+    _group?: any;
     _mission: Missions;
     _user: User;
 }

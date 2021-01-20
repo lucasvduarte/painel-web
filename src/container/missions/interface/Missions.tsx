@@ -16,5 +16,10 @@ export default interface MissionsInterface {
     is_public: boolean | string;
     is_grupal: boolean | string;
     single_answer: boolean | string;
+
     secret_code?: string;
+    created_at?: string;
+    visible_to?: Array<any>;
+    users?: Array<any>;
+    _user?: string;
 }

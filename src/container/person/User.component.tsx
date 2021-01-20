@@ -19,6 +19,7 @@ export default function UserComponent() {
     useEffect(() => {
         getUser().then(res => {
             if (res.data) {
+                console.log(res.data)
                 setUser(res.data);
             }
         }).finally(function () {

@@ -16,10 +16,19 @@ export const CardC = styled(({ ...props }) => (
     }
 `;
 
+export const CardCNoPadding = styled(({ ...props }) => (
+    <Card {...props} />
+))` 
+   && { 
+        border-radius: 12px;
+        padding: 5px;
+    }
+`;
+
 export const CardStyledSub = styled.div` 
     border-radius: 12px;
     margin-top: 15px;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     background-color: #58AFFF;
     color: #FFFFFF; 
     transition: 0.2s ease-in;

@@ -1,6 +1,7 @@
 import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
+import MissionsStatus from './interface/MissionsStatus';
 
 const URL: string = 'missions';
 
@@ -14,6 +15,10 @@ export const getByMissions = (id: string) => {
 
 export const getByMissionsStatus = (id: string, params?: any) => {
     return http.get<Array<Missions>>(`${URL}/${id}/answers`, { params: params })
+}
+
+export const getSeeAnswerMissions = (id: string, idSeeAnswer: string) => {
+    return http.get<MissionsStatus>(`${URL}/${id}/answers/${idSeeAnswer}`)
 }
 
 export const postMissions = (missions: Missions) => {
