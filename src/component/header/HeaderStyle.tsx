@@ -47,7 +47,7 @@ export const HeaderForm = styled.div`
     margin-left: 30px; 
     margin-right: 30px;
     transition: 0.2s ease-in;
-    @media (max-width: 600px) {
+    @media (max-width: 500px) {
         margin-left: 15px; 
         margin-right: 15px;
         transition: 0.2s ease-in;

@@ -27,12 +27,12 @@ export default function MiniGamesComponent() {
         });
     }, [pagination, request]);
 
-    const handleRequestSort = (event: MouseEvent<unknown>, property: string) => {
+    const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
         const isAsc = pagination.sort === property && pagination.asc === 1;
         setPagination({ ...pagination, sort: property, asc: isAsc ? -1 : 1 });
     };
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setPagination({ ...pagination, page: newPage + 1 });
     };
 

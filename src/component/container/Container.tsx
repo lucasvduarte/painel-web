@@ -21,7 +21,7 @@ export const ContainerResponsive = styled.div`
     margin-right: ${(props: Props) => `${props.marginRight ? props.marginRight : 50}px`}; 
     margin-top: ${(props: Props) => `${props.marginTop ? props.marginTop : 0}px`}; 
     margin-bottom: ${(props: Props) => `${props.marginBottom ? props.marginBottom : 0}px`};
-    @media (max-width: 600px) {  
+    @media (max-width: 500px) {  
         margin-left: ${(props: Props) => `${props.marginLeft ? (props.marginLeft / 2) : 25}px`};
         margin-right: ${(props: Props) => `${props.marginRight ? (props.marginRight / 2) : 25}px`}; 
         margin-top: ${(props: Props) => `${props.marginTop ? (props.marginTop / 2) : 0}px`};

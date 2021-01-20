@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
-import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW, ACTION } from '../../component/table/interfaces/TableInterface';
+import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getQuizzes, deleteQuizzes } from './Quizzes.service';
@@ -30,14 +30,14 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
         }).finally(function () {
             setRequest(false)
         });
-    }, [pagination, request]);
+    }, [pagination, request, allQuizzes]);
 
-    const handleRequestSort = (event: MouseEvent<unknown>, property: string) => {
+    const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
         const isAsc = pagination.sort === property && pagination.asc === 1;
         setPagination({ ...pagination, sort: property, asc: isAsc ? -1 : 1 });
     };
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setPagination({ ...pagination, page: newPage + 1 });
     };
 
@@ -47,10 +47,6 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
     const handleClickModalDelete = (value?: string) => {
         setOpenModalDelete(value || '');
-    };
-
-    const onSubmit = (quizzes: InterfacePagination) => {
-        //setPagination({ ...pagination, uf: quizzes.uf, municipio: quizzes.municipio, unidadeOperacao: quizzes?.unidadeOperacao, dataValidacaoInicial: quizzes.dataValidacaoInicial, meioValidacaoFinal: quizzes.meioValidacaoFinal });
     };
 
     const handleClickAction = (action: Action, quizzes: InterfacePagination) => {
