@@ -18,14 +18,18 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(true);
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
-        const user = {
-            _user: getToken()._id
+        let paginationAux: InterfacePagination = pagination;
+
+        if (!allMissions) {
+            paginationAux._user = getToken()._id;
         }
-        getMissions((!allMissions ? user : undefined)).then(res => {
+        getMissions(paginationAux).then(res => {
             if (res.data) {
-                setMissions(res.data);
+                setMissions(res.data.docs);
+                setTotal(res.data.total);
             }
         }).finally(function () {
             setRequest(false)
@@ -83,6 +87,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
             <Table
                 request={request}
                 data={missions}
+                size={total}
                 headCells={HEAD_CELL}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}

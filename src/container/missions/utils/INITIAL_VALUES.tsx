@@ -22,12 +22,12 @@ export const INITIAL_VALUES: Missions = {
 }
 
 export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
-    _user: '',
-    name: '',
-    description: '',
-    end_message: '',
+    //_user: '',
+    //name: '',
+    //description: '',
+    //end_message: '',
     limit: INITIAL_PAGINATION.limit,
     page: INITIAL_PAGINATION.page,
-    sort: INITIAL_PAGINATION.sort,
-    asc: INITIAL_PAGINATION.asc
+    //sort: INITIAL_PAGINATION.sort,
+    //asc: INITIAL_PAGINATION.asc
 }

@@ -13,15 +13,12 @@ export const INITIAL_VALUES: User = {
 }
 
 export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    type: '',
-    institution: '',
-    can_edit: false,
+    //name: '',
+    // email: '',  
+    //type: '',
+    //institution: '', 
     limit: INITIAL_PAGINATION.limit,
     page: INITIAL_PAGINATION.page,
-    sort: INITIAL_PAGINATION.sort,
-    asc: INITIAL_PAGINATION.asc
+    //sort: INITIAL_PAGINATION.sort,
+    //asc: INITIAL_PAGINATION.asc
 }

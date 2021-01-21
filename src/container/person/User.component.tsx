@@ -15,12 +15,13 @@ export default function UserComponent() {
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(true);
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
-        getUser().then(res => {
+        getUser(pagination).then(res => {
             if (res.data) {
-                console.log(res.data)
-                setUser(res.data);
+                setUser(res.data.docs);
+                setTotal(res.data.total);
             }
         }).finally(function () {
             setRequest(false)
@@ -75,6 +76,7 @@ export default function UserComponent() {
             <Table
                 request={request}
                 data={user}
+                size={total}
                 headCells={HEAD_CELL}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}

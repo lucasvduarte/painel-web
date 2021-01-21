@@ -1,9 +1,12 @@
+import { ReactNode } from 'react';
 import { Action, HeadCell, Order } from './TableInterface';
 
 export interface TableProps {
     data: Array<Object>;
     headCells: Array<HeadCell>;
+    children?: ReactNode;
     page?: number;
+    size?: number;
     rowsPerPage?: number;
     order?: Order;
     orderBy?: string;
@@ -12,6 +15,7 @@ export interface TableProps {
     noActionDelete?: boolean;
     noActionEdit?: boolean;
     noActionView?: boolean;
+    noTable?: boolean;
     editable?: boolean;
     onChangePage?(event: unknown, newPage: number): void;
     onChangeRowsPerPage?(event: React.ChangeEvent<HTMLInputElement>): void;

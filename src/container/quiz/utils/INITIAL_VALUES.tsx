@@ -20,12 +20,12 @@ export const INITIAL_VALUES: Quizzes = {
 }
 
 export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
-    _user: '',
-    title: '',
-    description: '',
-    secret_code: '',
+    //_user: '',
+    //title: '',
+    //description: '',
+    // secret_code: '',
     limit: INITIAL_PAGINATION.limit,
     page: INITIAL_PAGINATION.page,
-    sort: INITIAL_PAGINATION.sort,
-    asc: INITIAL_PAGINATION.asc
+    //sort: INITIAL_PAGINATION.sort,
+    //asc: INITIAL_PAGINATION.asc
 }

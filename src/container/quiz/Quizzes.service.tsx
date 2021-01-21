@@ -1,11 +1,12 @@
 import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/QuizzesPagination';
 import Quizzes from './interface/Quizzes';
+import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
 
 const URL: string = 'quizzes';
 
-export const getQuizzes = (params?: any) => {
-    return http.get<Array<Quizzes>>(URL, { params: params })
+export const getQuizzes = (params?: InterfacePagination) => {
+    return http.get<ResponsePagination>(URL, { params: params })
 }
 
 export const getByQuizzes = (id: string) => {

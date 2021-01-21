@@ -1,11 +1,12 @@
 import { http } from "../../core/http/Http.interceptor";
 import { InterfacePagination } from './interface/UserPagination';
 import User from './interface/User';
+import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
 
 const URL: string = 'users/';
 
 export const getUser = (params?: InterfacePagination) => {
-    return http.get<Array<User>>(URL, { params: params })
+    return http.get<ResponsePagination>(URL, { params: params })
 }
 
 export const getByUser = (id: string) => {

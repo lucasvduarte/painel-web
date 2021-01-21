@@ -18,14 +18,19 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(true);
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
-        const user = {
-            _user: getToken()._id
+        let paginationAux: InterfacePagination = pagination;
+
+        if (!allQuizzes) {
+            paginationAux._user = getToken()._id;
         }
-        getQuizzes((!allQuizzes ? user : undefined)).then(res => {
+
+        getQuizzes(paginationAux).then(res => {
             if (res.data) {
-                setQuizzes(res.data);
+                setQuizzes(res.data.docs);
+                setTotal(res.data.total);
             }
         }).finally(function () {
             setRequest(false)
@@ -79,6 +84,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
             <Table
                 request={request}
                 data={quizzes}
+                size={total}
                 headCells={HEAD_CELL}
                 page={pagination.page}
                 noActionEdit={allQuizzes}

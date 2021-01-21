@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 export interface Pagination {
-    size: number;
+    size?: number;
     page: number;
     rowsPerPage: number;
     onChangePage?(event: unknown, newPage: number): void;

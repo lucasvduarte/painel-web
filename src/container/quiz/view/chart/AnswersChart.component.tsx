@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    BarChart, Bar, Cell, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend, CartesianGrid
+    BarChart, Bar, Cell, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend
 } from 'recharts';
 import { getAnalyticsChoices } from '../../Quizzes.service';
 import { useParams } from "react-router";
