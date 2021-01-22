@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
-import { HEAD_CELL } from './utils/HEAD_CELL';
+import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getQuizzes, deleteQuizzes } from './Quizzes.service';
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ import { InterfacePagination } from './interface/QuizzesPagination';
 import Quizzes from './interface/Quizzes';
 import { QuizzesInterface } from './interface/QuizzesComponent';
 import { getToken } from '../../core/auth/auth';
+import { authentication } from '../../core/auth/Authentication';
 
 export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
@@ -78,17 +79,17 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     };
 
     return (
-        <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title={`${allQuizzes ? '' : 'Adicionar Quiz'}`} >
+        <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title='Adicionar Quiz' can={(authentication() && !allQuizzes)}>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table
                 request={request}
                 data={quizzes}
                 size={total}
-                headCells={HEAD_CELL}
+                headCells={authentication() ? HEAD_CELL : HEAD_CELL_NO_ACTION}
                 page={pagination.page}
-                noActionEdit={allQuizzes}
-                noActionDelete={allQuizzes}
+                noActionEdit={(allQuizzes || !authentication())}
+                noActionDelete={(allQuizzes || !authentication())}
                 rowsPerPage={pagination.limit}
                 order={pagination.asc === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}

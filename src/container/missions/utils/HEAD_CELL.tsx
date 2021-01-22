@@ -9,6 +9,14 @@ export const HEAD_CELL: Array<HeadCell> = [
     { id: ACTION, label: 'Ação' },
 ];
 
+export const HEAD_CELL_NO_ACTION: Array<HeadCell> = [
+    { id: 'name', label: 'Name' },
+    { id: 'description', label: 'Descrição' },
+    { id: 'end_message', label: 'Messagem Final' },
+    { id: 'lux', label: 'lux' },
+    { id: 'resources', label: 'resources' }
+];
+
 
 export const HEAD_CELL_MISSIOES: Array<HeadCell> = [
     { id: '_user', label: 'Nome', viewAttribute: 'name' },

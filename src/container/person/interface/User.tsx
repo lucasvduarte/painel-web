@@ -4,7 +4,7 @@ export default interface UserInterface {
     email: string;
     password: string;
     confirmPassword: string;
-    type: string;
+    type: '' | 'professor' | 'gestor' | 'estudante' | 'usuarioComum';
     institution: string;
     can_edit: boolean | string;
 }

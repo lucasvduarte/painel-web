@@ -10,21 +10,22 @@ type Props = {
     link?: string;
     title?: string;
     children?: ReactNode;
+    can?: boolean;
 }
 
-export default function Hearder({ namePage, subPage, link, title, children }: Props) {
+export default function Hearder({ namePage, subPage, link, title, children, can }: Props) {
 
     return (
         <ContainerResponsive>
-            <ContainerResponsive marginBottom={!title ? 30 : 0}>
+            <ContainerResponsive marginBottom={(!title || !can) ? 30 : 0}>
                 <Grid justify="flex-start" alignItems="center">
                     {namePage && <NamePage>{namePage}</NamePage>}
                     {subPage && <SubPage>{subPage}</SubPage>}
                 </Grid>
             </ContainerResponsive>
-            <Grid>
+            {can && <Grid>
                 {(link && title) && <ButtonLink link={link} title={title} />}
-            </Grid>
+            </Grid>}
             {children}
         </ContainerResponsive>
     );

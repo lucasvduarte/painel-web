@@ -8,6 +8,13 @@ export const HEAD_CELL: Array<HeadCell> = [
     { id: ACTION, label: 'Ação' },
 ];
 
+export const HEAD_CELL_NO_ACTION: Array<HeadCell> = [
+    { id: 'title', label: 'Título' },
+    { id: 'lux', label: 'Lux' },
+    { id: 'resources', label: 'Recursos' },
+    { id: 'secret_code', label: 'Código secreto' }
+];
+
 
 export const HEAD_CELL_ANSWERS: Array<HeadCell> = [
     { id: '_user', label: 'Usuário', viewAttribute: 'name' },

@@ -2,12 +2,13 @@ import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE } from '../../component/table/interfaces/TableInterface';
-import { HEAD_CELL } from './utils/HEAD_CELL';
+import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getUser, deleteUser } from './User.service';
 import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/UserPagination';
 import User from './interface/User';
+import { authentication } from '../../core/auth/Authentication';
 
 export default function UserComponent() {
     let history = useHistory();
@@ -70,19 +71,21 @@ export default function UserComponent() {
     };
 
     return (
-        <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" >
+        <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" can={authentication()}>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table
                 request={request}
                 data={user}
                 size={total}
-                headCells={HEAD_CELL}
+                headCells={authentication() ? HEAD_CELL : HEAD_CELL_NO_ACTION}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}
                 order={pagination.asc === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
                 noActionView
+                noActionEdit={!authentication()}
+                noActionDelete={!authentication()}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onRequestSort={handleRequestSort}

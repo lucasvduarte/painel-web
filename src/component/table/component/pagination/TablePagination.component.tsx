@@ -12,7 +12,7 @@ export default function TablePaginationComponent(props: Pagination) {
             rowsPerPageOptions={[10, 25]}
             component="div"
             labelRowsPerPage="Itens por pagina"
-            count={size ? size : -1}
+            count={size ?? -1}
             rowsPerPage={rowsPerPage}
             page={page - 1}
             labelDisplayedRows={({ from, to, count }: DisplayedRows) => `${from}-${to} de ${count !== -1 ? count : ` ${to}`}`}

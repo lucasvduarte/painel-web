@@ -9,7 +9,7 @@ export const NamePage = styled.span`
     text-transform: uppercase;
     transition: 0.2s ease-in; 
     @media (max-width: 500px) {
-        font-size: 26px;
+        font-size: 24px;
         transition: 0.2s ease-in;
     }
 `;
@@ -25,7 +25,7 @@ export const SubPage = styled.span`
     margin-left: 20px;
     padding-left: 20px;
     @media (max-width: 500px) {
-        font-size: 17px;
+        font-size: 16px;
         margin-left: 15px;
         padding-left: 15px;
         transition: 0.2s ease-in;

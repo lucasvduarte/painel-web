@@ -8,6 +8,7 @@ import { getMiniGamesMemories, deleteMiniGamesMemories } from './MiniGames.servi
 import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/MiniGamesPagination';
 import MiniGames from './interface/MiniGames';
+import { authentication } from '../../core/auth/Authentication';
 
 export default function MiniGamesComponent() {
 
@@ -70,7 +71,7 @@ export default function MiniGamesComponent() {
     };
 
     return (
-        <Header namePage={`MiniGames Memória `} link="/minigames/novo-minigame-memoria" title={'Adicionar Jogo'} >
+        <Header namePage={`MiniGames Memória `} link="/minigames/novo-minigame-memoria" title='Adicionar Jogo' can={authentication()}>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table
@@ -82,6 +83,7 @@ export default function MiniGamesComponent() {
                 order={pagination.asc === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
                 noActionEdit
+                noActionDelete={!authentication()}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onRequestSort={handleRequestSort}

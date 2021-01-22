@@ -49,10 +49,6 @@ function TableBodyComponent(props: TableBodyProps) {
 
     const action: boolean = [...headCells][headCells.length - 1].id === ACTION;
 
-    const viewAttribute = (obj: any, attribute: string): string => {
-        return obj[attribute];
-    }
-
     if (![...data].length) {
         return <TableEmpty />
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
-import { HEAD_CELL } from './utils/HEAD_CELL';
+import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getMissions, deleteMissions } from './Missions.service';
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
 import { MissionsInterface } from './interface/MissionsComponent';
 import { getToken } from "../../core/auth/auth";
+import { authentication } from '../../core/auth/Authentication';
 
 export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
@@ -81,20 +82,20 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     };
 
     return (
-        <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title={`${allMissions ? '' : 'Adicionar Missão'}`} >
+        <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title='Adicionar Missão' can={(authentication() && !allMissions)} >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table
                 request={request}
                 data={missions}
                 size={total}
-                headCells={HEAD_CELL}
+                headCells={authentication() ? HEAD_CELL : HEAD_CELL_NO_ACTION}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}
                 order={pagination.asc === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
-                noActionDelete={allMissions}
-                noActionEdit={allMissions}
+                noActionDelete={(allMissions || !authentication())}
+                noActionEdit={(allMissions || !authentication())}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onRequestSort={handleRequestSort}

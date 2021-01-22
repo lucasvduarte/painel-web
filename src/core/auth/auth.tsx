@@ -1,14 +1,16 @@
+import { Response } from './Response';
+
 export const TOKEN_KEY = "authToken";
 
-export const isAuthenticated = () => {
+export const isAuthenticated = (): boolean => {
   const json: any = localStorage.getItem(TOKEN_KEY) || 'null';
-  const obj: any = JSON.parse(json);
+  const obj: Response = JSON.parse(json);
   return !!obj;
 };
 
-export const getToken = () => {
+export const getToken = (): Response => {
   const json: any = localStorage.getItem(TOKEN_KEY);
-  const obj: any = JSON.parse(json);
+  const obj: Response = JSON.parse(json);
   return obj;
 };
 
