@@ -47,7 +47,7 @@ export default function StoreComponent({ isPupils }: StoreInterface) {
     };
 
     return (
-        <Header namePage="Loja Virtual" link="/loja-virtual/novo-item" title={`${isPupils ? '' : 'Adiconar Item'}`} >
+        <Header namePage="Loja Virtual" link="/loja-virtual/novo-item" title={`${isPupils ? '' : 'Adicionar Item'}`} >
 
             <Table
                 request={request}

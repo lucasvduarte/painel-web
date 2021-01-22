@@ -78,7 +78,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     };
 
     return (
-        <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title={`${allQuizzes ? '' : 'Adiconar Quiz'}`} >
+        <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title={`${allQuizzes ? '' : 'Adicionar Quiz'}`} >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table

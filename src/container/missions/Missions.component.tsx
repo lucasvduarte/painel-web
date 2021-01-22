@@ -81,7 +81,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     };
 
     return (
-        <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title={`${allMissions ? '' : 'Adiconar Missão'}`} >
+        <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title={`${allMissions ? '' : 'Adicionar Missão'}`} >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table

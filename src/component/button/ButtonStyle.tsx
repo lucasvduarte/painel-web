@@ -21,8 +21,8 @@ export const FabButton = styled(({ ...props }) => (
 ))`
   && {
       position: fixed;
-      bottom: 40px;
-      right: 40px;
+      bottom: 36px;
+      left: 40px;
       z-index: 1;
       transition: 0.2s ease-in;
       @media (max-width: 500px) {

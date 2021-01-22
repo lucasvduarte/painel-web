@@ -70,7 +70,7 @@ export default function MiniGamesComponent() {
     };
 
     return (
-        <Header namePage={`MiniGames Memória `} link="/minigames/novo-minigame-memoria" title={'Adiconar Jogo'} >
+        <Header namePage={`MiniGames Memória `} link="/minigames/novo-minigame-memoria" title={'Adicionar Jogo'} >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table

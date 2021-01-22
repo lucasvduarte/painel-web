@@ -27,8 +27,8 @@ export const GameMapComponent = ({ google, data, location_lat, location_lng }: a
             return (
                 //@ts-ignore
                 <Marker onClick={onMarkerClick} name={ViewPointInformation(el)} position={{ lat: el.location_lat, lng: el.location_lng }} key={index} />
-            )
-        })
+            );
+        });
     }
 
     const InfoWindowMaps = () => {
@@ -37,21 +37,21 @@ export const GameMapComponent = ({ google, data, location_lat, location_lng }: a
             <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
                 {selectedPlace ? <>{selectedPlace.name}</> : <></>}
             </InfoWindow>
-        )
+        );
     }
 
     const marker = (location_lat: string | undefined, location_lng: string | undefined,) => {
         return (
             //@ts-ignore
             <Marker position={{ lat: location_lat, lng: location_lng }} />
-        )
+        );
     }
 
     return (
         //@ts-ignore
         <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: location_lat || -7.230287, lng: location_lng || -35.903393 }} style={{ margin: '0% 3% 10% 3%', borderRadius: 12, height: 480 }}>
             {!data?.length ? marker(location_lat, location_lng) : markerPoints(data)}
-            {!data?.length ? InfoWindowMaps() : <></>}
+            {(data && data?.length) ? InfoWindowMaps() : <></>}
         </Map>
     );
 }

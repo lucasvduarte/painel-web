@@ -70,7 +70,7 @@ export default function UserComponent() {
     };
 
     return (
-        <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adiconar Usuário" >
+        <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" >
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
             <Table

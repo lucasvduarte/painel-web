@@ -7,10 +7,10 @@ export const CardC = styled(({ ...props }) => (
 ))` 
    && { 
         border-radius: 12px;
-        padding: 30px 20px 10px 20px;
+        padding: 30px 20px 0px 20px;
         transition: 0.2s ease-in;
         @media (max-width: 500px) {
-            padding: 30px 10px 10px 10px;
+            padding: 30px 10px 0px 10px;
             transition: 0.2s ease-in;
         }
     }
@@ -33,7 +33,8 @@ export const CardStyledSub = styled.div`
     color: #FFFFFF; 
     transition: 0.2s ease-in;
     @media (max-width: 500px) {
-        padding: 10px 15px 10px 15px;
+        margin-top: -10px;
+        padding: 30px 15px 30px 15px;
         transition: 0.2s ease-in;
     }
 `;

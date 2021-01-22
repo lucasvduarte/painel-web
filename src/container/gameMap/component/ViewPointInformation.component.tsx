@@ -35,7 +35,7 @@ function ViewPointInformation(data: MissionsStatus) {
                     </GridComponent>
                     <GridComponent justify="flex-start" alignItems="center">
                         <LinkIcon />
-                        <a style={{ textDecoration: 'none' }} href={`/missoes/minhas-missoes/${data._mission._id}/resposta/${data._id}`}><Span> Visualizar missão</Span></a>
+                        <a style={{ textDecoration: 'none' }} href={`/missoes/minhas-missoes/visualizar-missao//${data._mission._id}/resposta/${data._id}`}><Span> Visualizar missão</Span></a>
                     </GridComponent>
                 </Grid>
             </GridComponent>
