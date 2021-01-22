@@ -17,7 +17,7 @@ const FormMiniGames = ({ handleSubmit, initialValues, request, handleChangeImage
         <Formik initialValues={initialValues} onSubmit={async (values: MiniGames) => {
             await handleSubmit(values);
         }} validationSchema={Validate} validateOnChange={false} >
-            {({ values, handleChange, errors, setFieldValue }: FormikProps<MiniGames>) => (
+            {({ values, handleChange, errors, isSubmitting }: FormikProps<MiniGames>) => (
                 <FormikForm>
                     <CardAccordion>
                         <Grid container spacing={3}>
@@ -89,7 +89,7 @@ const FormMiniGames = ({ handleSubmit, initialValues, request, handleChangeImage
                             </Grid>
                         </Grid>
                         {console.log(images)}
-                        <Button.ButtonForm link="/minigames/memoria" />
+                        <Button.ButtonForm link="/minigames/memoria" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>
             )}

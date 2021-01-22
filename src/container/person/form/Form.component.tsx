@@ -24,7 +24,7 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
         <Formik initialValues={initialValues} onSubmit={async (values: User) => {
             await handleSubmit(values);
         }} validationSchema={validations} validateOnChange={false} >
-            {({ values, handleChange, errors, resetForm }: FormikProps<User>) => (
+            {({ values, handleChange, errors, isSubmitting }: FormikProps<User>) => (
                 <FormikForm>
                     <CardAccordion>
                         <Grid container spacing={3}>
@@ -119,7 +119,7 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
                             )}
                         </Grid>
 
-                        <Button.ButtonForm link="/usuarios" />
+                        <Button.ButtonForm link="/usuarios" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>
             )}

@@ -3,7 +3,7 @@ export const TOKEN_KEY = "authToken";
 export const isAuthenticated = () => {
   const json: any = localStorage.getItem(TOKEN_KEY) || 'null';
   const obj: any = JSON.parse(json);
-  return !!obj.token;
+  return !!obj;
 };
 
 export const getToken = () => {

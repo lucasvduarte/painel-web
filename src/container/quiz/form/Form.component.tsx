@@ -28,7 +28,7 @@ const FormQuizzes = ({ handleSubmit, initialValues, request }: FormProps) => {
         <Formik initialValues={initialValues} onSubmit={async (values: Missions) => {
             await handleSubmit(values);
         }} validationSchema={Validate} validateOnChange={false} >
-            {({ values, handleChange, errors, setFieldValue }: FormikProps<Missions>) => (
+            {({ values, handleChange, errors, setFieldValue, isSubmitting }: FormikProps<Missions>) => (
                 <FormikForm>
                     <CardAccordion>
                         <Grid container spacing={3}>
@@ -211,7 +211,7 @@ const FormQuizzes = ({ handleSubmit, initialValues, request }: FormProps) => {
                             </CardAccordion>
                         </Grid>
 
-                        <Button.ButtonForm link="/quizzes/meus-quizzes" />
+                        <Button.ButtonForm link="/quizzes/meus-quizzes" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>
             )}

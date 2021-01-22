@@ -17,12 +17,17 @@ function TableComponent(props: TableProps) {
 
     return (
         <PaperComponent>
-            <TableContainerStyled>
-                <Table aria-labelledby="tableTitle" aria-label="enhanced table" >
-                    {!noTable && <TableHead {...props} />}
-                    {!noTable ? <TableBody {...props} /> : children}
-                </Table>
-            </TableContainerStyled>
+            {!noTable && (
+                <TableContainerStyled>
+                    <Table aria-labelledby="tableTitle" aria-label="enhanced table" >
+                        <TableHead {...props} />
+                        <TableBody {...props} />
+                    </Table>
+                </TableContainerStyled>
+            )}
+
+            {children}
+
             { (page && rowsPerPage) && <TablePagination page={page} rowsPerPage={rowsPerPage} size={size} {...props} />}
         </PaperComponent>
     );

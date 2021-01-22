@@ -20,7 +20,7 @@ const FormMissions = ({ handleSubmit, initialValues, request }: FormProps) => {
         <Formik initialValues={initialValues} onSubmit={async (values: Missions) => {
             await handleSubmit(values);
         }} validationSchema={Validate} validateOnChange={false} >
-            {({ values, handleChange, errors, setFieldValue }: FormikProps<Missions>) => (
+            {({ values, handleChange, errors, setFieldValue, isSubmitting }: FormikProps<Missions>) => (
                 <FormikForm>
                     <CardAccordion>
                         <Grid container spacing={3}>
@@ -265,7 +265,7 @@ const FormMissions = ({ handleSubmit, initialValues, request }: FormProps) => {
                             </CardAccordion>
                         </Grid>
 
-                        <Button.ButtonForm link="/missoes/minhas-missoes" />
+                        <Button.ButtonForm link="/missoes/minhas-missoes" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>
             )}

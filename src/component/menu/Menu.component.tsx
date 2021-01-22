@@ -14,7 +14,7 @@ export default function CircularIndeterminate() {
     const [menuQuizzes] = useState<Array<any>>([{ title: 'Meus Quizzes', href: 'quizzes/meus-quizzes' }, { title: 'Todos os Quizzes', href: 'quizzes/todos-quizzes' }]);
     const [menuMissions] = useState<Array<any>>([{ title: 'Minhas Missões', href: 'missoes/minhas-missoes' }, { title: 'Todas as Missões', href: 'missoes/todas-missoes' }]);
     const [menuMiniGames] = useState<Array<any>>([{ title: 'Jogo da Memória', href: 'minigames/memoria' }]);
-    const [menuStore] = useState<Array<any>>([{ title: 'Todos os Itens', href: 'loja-virtual/todos-itens' }, { title: 'Obra dos Alunos', href: 'loja-virtual/todos-itens-alunos' }]);
+    const [menuStore] = useState<Array<any>>([{ title: 'Todos os Itens', href: 'loja-virtual' }, { title: 'Obra dos Alunos', href: 'loja-virtual/alunos' }]);
 
     const menu = (value: string) => {
         setMenuNumber(value);

@@ -6,6 +6,7 @@ import Missions from './missions/Missions.container';
 import Quizzes from './quiz/Quizzes.container';
 import MiniGames from './miniGames/MiniGames.container';
 import GameMap from './gameMap/GameMap.component';
+import Store from './store/Store.container';
 
 const Routes = () => {
     return (
@@ -16,6 +17,7 @@ const Routes = () => {
             <Route path="/quizzes/" component={Quizzes} />
             <Route path="/minigames/" component={MiniGames} />
             <Route path="/mapa-do-jogo/" component={GameMap} />
+            <Route path="/loja-virtual/" component={Store} />
         </Switch>
     );
 };
