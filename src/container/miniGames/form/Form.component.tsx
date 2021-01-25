@@ -1,23 +1,41 @@
 import 'date-fns';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { Button, Progress, Form, CardAccordion, Img } from "../../../component/Component";
+import { Button, Form, CardAccordion, Img } from "../../../component/Component";
 import { FormProps } from '../interface/Form';
 import { Grid } from '@material-ui/core';
 import MiniGames from '../interface/MiniGames';
 import { Validate } from '../utils/Validate';
 
-const FormMiniGames = ({ handleSubmit, initialValues, request, handleChangeImages, images }: FormProps) => {
+const FormMiniGames = ({ handleSubmit, initialValues, isImages }: FormProps) => {
 
-    if (request) {
-        return <Progress open={request} />
+    const addImage = (file: File, imagesAux: Array<any>, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            imagesAux.push(reader.result);
+            setFieldValue('images', imagesAux);
+        };
     }
+
+
+    const handleChangeImg = (setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void, event: ChangeEvent<HTMLInputElement>, images: Array<any>): void => {
+        var imagesAux: Array<any> = [...images];
+
+        if (event.target.files?.length && imagesAux.length <= 8) {
+            for (let index = 0; index < event.target.files?.length; index++) {
+                let file = event.target.files[index];
+                addImage(file, imagesAux, setFieldValue);
+            }
+        }
+    }
+
 
     return (
         <Formik initialValues={initialValues} onSubmit={async (values: MiniGames) => {
             await handleSubmit(values);
         }} validationSchema={Validate} validateOnChange={false} >
-            {({ values, handleChange, errors, isSubmitting }: FormikProps<MiniGames>) => (
+            {({ values, handleChange, errors, isSubmitting, setFieldValue }: FormikProps<MiniGames>) => (
                 <FormikForm>
                     <CardAccordion>
                         <Grid container spacing={3}>
@@ -82,13 +100,13 @@ const FormMiniGames = ({ handleSubmit, initialValues, request, handleChangeImage
                                 </Form.ContainerRadio>
                             </Grid>
                             <Grid item xs={12}>
-                                {handleChangeImages && <Button.ButtonImport onChange={handleChangeImages} />}
-                                {images && images.map((obj: any, index: number) => {
-                                    return <Img src={obj} alt={`image-${index}`} key={index} />
+                                {isImages && <Button.ButtonImport onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeImg(setFieldValue, event, values.images || [])} />}
+                                {values.images && values.images.map((obj: any, index: number) => {
+                                    return <Img src={obj} alt={`image-${index}`} key={index} borderRadius={12} />
                                 })}
                             </Grid>
                         </Grid>
-                        {console.log(images)}
+
                         <Button.ButtonForm link="/minigames/memoria" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>

@@ -32,19 +32,19 @@ export default function RegisterMissions() {
 
     const Register = async (data: Missions) => {
         await postMissions(data).then(res => {
-            toast.success("Missão foi cadastrado!", { toastId: 'sucessMissions' });
+            toast.success("Missão foi cadastrada com sucesso!", { toastId: 'sucessMissions' });
             history.push('/missoes/minhas-missoes');
         }).catch(error => {
-            toast.error("Missão não foi cadastrado!", { toastId: error.message });
+            toast.error("Erro ao cadastrar missão!", { toastId: error.message });
         });
     };
 
     const Edit = async (data: Missions) => {
         await putMissions(data).then(res => {
-            toast.success("Missão foi Atualizado!", { toastId: 'sucessMissions' });
+            toast.success("Missão foi atualizada com sucesso!", { toastId: 'sucessMissions' });
             history.push('/missoes/minhas-missoes');
         }).catch(error => {
-            toast.error("Missão não foi Atualizado!", { toastId: error.message });
+            toast.error("Erro ao atualizar missão!", { toastId: error.message });
         });
     };
 

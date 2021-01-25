@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { ContainerStyled } from '../container/Container';
 
-export interface Props {
+interface Props {
     direction?: "row" | "column";
     justify?: "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly";
     alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";

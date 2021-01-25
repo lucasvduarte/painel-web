@@ -8,19 +8,19 @@ import { Action, ACTION_VIEW } from '../../../component/table/interfaces/TableIn
 import { useHistory } from 'react-router-dom';
 import { MissionsInterface } from '../interface/MissionsComponent';
 import { Status } from '../interface/Status';
+import { APROVADO, REJEITADO, PENDENTE } from '../utils/STATUS';
 
 export default function View({ allMissions }: MissionsInterface) {
 
     let { id } = useParams<ParamTypes>();
     let history = useHistory();
     const [missions, setMissions] = useState<Array<any>>([]);
-    const [status, setStatus] = useState<Status>({ status: 'Pendente' });
+    const [status, setStatus] = useState<Status>({ status: PENDENTE });
     const [request, setRequest] = useState<boolean>(true);
 
     useEffect(() => {
         getByMissionsStatus(id, status).then(res => {
             if (res.data) {
-                console.log(res.data)
                 setMissions(res.data);
             }
         }).finally(function () {
@@ -49,11 +49,11 @@ export default function View({ allMissions }: MissionsInterface) {
 
     const tabValue = (value: number) => {
         if (!value) {
-            setStatus({ ...status, status: 'Pendente' });
+            setStatus({ ...status, status: PENDENTE });
         } else if (value === 1) {
-            setStatus({ ...status, status: 'Aprovado' });
+            setStatus({ ...status, status: APROVADO });
         } else {
-            setStatus({ ...status, status: 'Rejeitado' });
+            setStatus({ ...status, status: REJEITADO });
         }
         setRequest(true);
     }

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export interface Props {
-    maxWidth?: number;
-    maxHeight?: number;
+    width?: number;
+    height?: number;
+    borderRadius?: number;
 }
 
 export const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    max-width: ${(props: Props) => `${props.maxWidth ? props.maxWidth : 200}px`}; 
-    max-height: ${(props: Props) => `${props.maxHeight ? props.maxHeight : 150}px`};
+    width: ${(props: Props) => `${props.width ? props.width : 200}px`}; 
+    height: ${(props: Props) => `${props.height ? props.height : 150}px`};
     margin: 5px; 
+    border-radius: ${(props: Props) => `${props.borderRadius ? props.borderRadius : 0}px`};
 `;

@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-type Props = {
+interface Props {
     open: boolean;
 }
 

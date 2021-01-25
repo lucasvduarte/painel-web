@@ -15,7 +15,6 @@ export default function Grafico() {
 
     useEffect(() => {
         getAnalyticsChoices(id).then(res => {
-            console.log(res.data)
             setData(format(res.data));
         }).finally(function () {
             setRequest(false);

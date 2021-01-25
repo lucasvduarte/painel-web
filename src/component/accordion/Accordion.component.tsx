@@ -6,7 +6,7 @@ import { Container } from './Accordion';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-type Props = {
+interface Props {
     children?: ReactNode;
     title: string;
 }

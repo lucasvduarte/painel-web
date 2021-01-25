@@ -32,19 +32,19 @@ export default function RegisterQuizzes() {
 
     const Register = async (data: Quizzes) => {
         await postQuizzes(data).then(res => {
-            toast.success("Quizzes foi cadastrado!", { toastId: 'sucessQuizzes' });
+            toast.success("Quiz foi cadastrado com sucesso!", { toastId: 'sucessQuizzes' });
             history.push('/quizzes/meus-quizzes');
         }).catch(error => {
-            toast.error("Quizzes não foi cadastrado!", { toastId: error.message });
+            toast.error("Erro ao cadastrar quiz!", { toastId: error.message });
         });
     };
 
     const Edit = async (data: Quizzes) => {
         await putQuizzes(data).then(res => {
-            toast.success("Quizzes foi Atualizado!", { toastId: 'sucessQuizzes' });
+            toast.success("Quiz foi atualizado com sucesso!", { toastId: 'sucessQuizzes' });
             history.push('/quizzes/meus-quizzes');
         }).catch(error => {
-            toast.error("Quizzes não foi Atualizado!", { toastId: error.message });
+            toast.error("Erro ao atualizar usuário!", { toastId: error.message });
         });
     };
 

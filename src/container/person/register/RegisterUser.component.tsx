@@ -32,25 +32,25 @@ export default function RegisterUser() {
 
     const Register = async (data: User) => {
         await postUser(data).then(res => {
-            toast.success("Usuário foi cadastrado!", { toastId: 'sucessUser' });
+            toast.success("Usuário foi cadastrado com sucesso!", { toastId: 'sucessUser' });
             history.push('/usuarios');
         }).catch(error => {
-            toast.error("Usuário não foi cadastrado!", { toastId: error.message });
+            toast.error("Erro ao cadastrar usuário!", { toastId: error.message });
         });
     };
 
     const Edit = async (data: User) => {
         await putUser(data).then(res => {
-            toast.success("Usuário foi Atualizado!", { toastId: 'sucessUser' });
+            toast.success("Usuário foi Atualizado com sucesso!", { toastId: 'sucessUser' });
             history.push('/usuarios');
         }).catch(error => {
-            toast.error("Usuário não foi Atualizado!", { toastId: error.message });
+            toast.error("Erro ao atualizar usuário!", { toastId: error.message });
         });
     };
 
     return (
         <Header namePage="Pessoas" subPage={`${id ? 'Editar' : 'Nova'} Pessoa`}>
-            <Form handleSubmit={onSubmit} initialValues={person} request={id ? request : false} />
+            <Form handleSubmit={onSubmit} initialValues={person} request={id ? request : false} isRequired={!id} />
         </Header>
     );
 }

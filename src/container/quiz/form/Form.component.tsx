@@ -9,14 +9,7 @@ import { Validate } from '../utils/Validate';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { HeadCell } from '../../../component/table/interfaces/TableInterface';
-
-const CORRECT_ANSWER: Array<HeadCell> = [
-    { id: 'a', label: 'A' },
-    { id: 'b', label: 'B' },
-    { id: 'c', label: 'C' },
-    { id: 'd', label: 'D' },
-    { id: 'e', label: 'E' },
-];
+import { CORRECT_ANSWER } from '../utils/CORRECT_ANSWER';
 
 const FormQuizzes = ({ handleSubmit, initialValues, request }: FormProps) => {
 
@@ -210,7 +203,6 @@ const FormQuizzes = ({ handleSubmit, initialValues, request }: FormProps) => {
                                 </>
                             </CardAccordion>
                         </Grid>
-
                         <Button.ButtonForm link="/quizzes/meus-quizzes" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>

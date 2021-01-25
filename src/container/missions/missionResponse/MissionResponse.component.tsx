@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import ParamTypes from '../../../core/interfaces/ParamTypes';
 import { MissionsInterface } from '../interface/MissionsComponent';
-import { Header, Card, Img, GridComponent } from '../../../component/Component';
+import { Header, Card, Img } from '../../../component/Component';
 import { getSeeAnswerMissions } from '../Missions.service';
 import MissionsStatus from '../interface/MissionsStatus';
 import Maps from '../../gameMap/component/Maps.component';
@@ -26,7 +26,7 @@ export default function View({ allMissions }: MissionsInterface) {
     const image = (image: any) => {
         return (
             <Card noPadding >
-                <Img src={image} alt="imageDefaultUser" maxHeight={220} maxWidth={300} />
+                <Img src={image} alt="imageDefaultUser" height={220} width={300} />
             </Card>
         )
     }

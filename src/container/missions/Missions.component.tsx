@@ -72,9 +72,9 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
     const handleClickDelete = async () => {
         await deleteMissions(openModalDelete).then(res => {
-            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteMissions' });
+            toast.success("Missão excluída com sucesso!", { toastId: 'sucessDeleteMissions' });
         }).catch(error => {
-            toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
+            toast.error("Erro ao excluir missão!", { toastId: error.message });
         }).finally(function () {
             setRequest(true);
             handleClickModalDelete('');
@@ -84,7 +84,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     return (
         <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title='Adicionar Missão' can={(authentication() && !allMissions)} >
 
-            <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
+            <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão dessa missão?" />
             <Table
                 request={request}
                 data={missions}

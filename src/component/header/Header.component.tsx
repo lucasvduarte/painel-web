@@ -4,7 +4,7 @@ import ButtonLink from '../button/ButtonLink.component';
 import { ContainerResponsive } from '../container/Container';
 import Grid from '../grid/GridComponent.component';
 
-type Props = {
+interface Props {
     namePage?: string;
     subPage?: string;
     link?: string;
@@ -17,7 +17,7 @@ export default function Hearder({ namePage, subPage, link, title, children, can 
 
     return (
         <ContainerResponsive>
-            <ContainerResponsive marginBottom={(!title || !can) ? 30 : 0}>
+            <ContainerResponsive marginBottom={(!title || !can) ? 30 : 15}>
                 <Grid justify="flex-start" alignItems="center">
                     {namePage && <NamePage>{namePage}</NamePage>}
                     {subPage && <SubPage>{subPage}</SubPage>}

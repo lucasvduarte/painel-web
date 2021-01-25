@@ -73,7 +73,7 @@ export default function UserComponent() {
     return (
         <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" can={authentication()}>
 
-            <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
+            <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse usuário?" />
             <Table
                 request={request}
                 data={user}

@@ -14,16 +14,16 @@ const arrayType: Array<any> = [
     { id: 'usuarioComum', label: 'Usuário Comum' },
 ]
 
-const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
+const FormPerson = ({ handleSubmit, initialValues, request, isRequired }: FormProps) => {
 
     if (request) {
         return <Progress open={request} />
     }
-    let validations = Validate(!initialValues._id)
+
     return (
         <Formik initialValues={initialValues} onSubmit={async (values: User) => {
             await handleSubmit(values);
-        }} validationSchema={validations} validateOnChange={false} >
+        }} validationSchema={Validate(isRequired)} validateOnChange={false} >
             {({ values, handleChange, errors, isSubmitting }: FormikProps<User>) => (
                 <FormikForm>
                     <CardAccordion>
@@ -118,7 +118,6 @@ const FormPerson = ({ handleSubmit, initialValues, request }: FormProps) => {
                                 </Grid>
                             )}
                         </Grid>
-
                         <Button.ButtonForm link="/usuarios" disabled={isSubmitting} />
                     </CardAccordion>
                 </FormikForm>

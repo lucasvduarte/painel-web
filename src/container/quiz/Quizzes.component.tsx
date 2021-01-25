@@ -69,9 +69,9 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
     const handleClickDelete = async () => {
         await deleteQuizzes(openModalDelete).then(res => {
-            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteQuizzes' });
+            toast.success("Quiz excluído com sucesso!", { toastId: 'sucessDeleteQuizzes' });
         }).catch(error => {
-            toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
+            toast.error("Erro ao excluir quiz!", { toastId: error.message });
         }).finally(function () {
             setRequest(true);
             handleClickModalDelete('');
@@ -81,7 +81,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     return (
         <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title='Adicionar Quiz' can={(authentication() && !allQuizzes)}>
 
-            <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão do Registro?" />
+            <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse quiz?" />
             <Table
                 request={request}
                 data={quizzes}
