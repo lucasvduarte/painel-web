@@ -20,5 +20,5 @@ export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
     limit: INITIAL_PAGINATION.limit,
     page: INITIAL_PAGINATION.page,
     sort: INITIAL_PAGINATION.sort,
-    asc: INITIAL_PAGINATION.asc
+    order: INITIAL_PAGINATION.order
 }

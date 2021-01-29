@@ -29,8 +29,8 @@ export default function MiniGamesComponent() {
     }, [pagination, request]);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
-        const isAsc = pagination.sort === property && pagination.asc === 1;
-        setPagination({ ...pagination, sort: property, asc: isAsc ? -1 : 1 });
+        const isAsc = pagination.sort === property && pagination.order === 1;
+        setPagination({ ...pagination, sort: property, order: isAsc ? -1 : 1 });
     };
 
     const handleChangePage = (_event: unknown, newPage: number) => {
@@ -80,7 +80,7 @@ export default function MiniGamesComponent() {
                 headCells={HEAD_CELL}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}
-                order={pagination.asc === 1 ? 'asc' : 'desc'}
+                order={pagination.order === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
                 noActionEdit
                 noActionDelete={!authentication()}

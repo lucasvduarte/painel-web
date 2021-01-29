@@ -30,8 +30,8 @@ export default function UserComponent() {
     }, [pagination, request]);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
-        const isAsc = pagination.sort === property && pagination.asc === 1;
-        setPagination({ ...pagination, sort: property, asc: isAsc ? -1 : 1 });
+        const isAsc = pagination.sort === property && pagination.order === 1;
+        setPagination({ ...pagination, sort: property, order: isAsc ? -1 : 1 });
     };
 
     const handleChangePage = (_event: unknown, newPage: number) => {
@@ -81,7 +81,7 @@ export default function UserComponent() {
                 headCells={authentication() ? HEAD_CELL : HEAD_CELL_NO_ACTION}
                 page={pagination.page}
                 rowsPerPage={pagination.limit}
-                order={pagination.asc === 1 ? 'asc' : 'desc'}
+                order={pagination.order === 1 ? 'asc' : 'desc'}
                 orderBy={pagination.sort}
                 noActionView
                 noActionEdit={!authentication()}

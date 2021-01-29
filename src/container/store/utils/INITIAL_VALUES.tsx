@@ -18,6 +18,6 @@ export const INITIAL_VALUES_PAGINATION: InterfacePagination = {
     //institution: '', 
     limit: INITIAL_PAGINATION.limit,
     page: INITIAL_PAGINATION.page,
-    //sort: INITIAL_PAGINATION.sort,
-    //asc: INITIAL_PAGINATION.asc
+    sort: INITIAL_PAGINATION.sort,
+    order: INITIAL_PAGINATION.order
 }
