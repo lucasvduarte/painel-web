@@ -26,12 +26,12 @@ export default function RegisterItem() {
         }
     }, [id]);
 
-    const onSubmit = (data: Item) => {
-        id ? Edit(data) : Register(data);
+    const onSubmit = async (data: Item) => {
+        await (id ? Edit(data) : Register(data));
     };
 
-    const Register = async (data: Item) => {
-        await postStore(data).then(res => {
+    const Register = (data: Item): Promise<any> => {
+        return postStore(data).then(res => {
             toast.success("Item foi cadastrado!", { toastId: 'sucessItem' });
             history.push('/Item/meus-Item');
         }).catch(error => {
@@ -39,8 +39,8 @@ export default function RegisterItem() {
         });
     };
 
-    const Edit = async (data: Item) => {
-        await putStore(data).then(res => {
+    const Edit = (data: Item): Promise<any> => {
+        return putStore(data).then(res => {
             toast.success("Item foi Atualizado!", { toastId: 'sucessItem' });
             history.push('/Item/meus-Item');
         }).catch(error => {

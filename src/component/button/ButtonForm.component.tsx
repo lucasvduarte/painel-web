@@ -14,7 +14,7 @@ type Props = {
 }
 
 export default function ButtonForm({ link, disabled, marginBottom, onClick, onClickCancel }: Props) {
-
+    console.log(disabled)
     return (
         <ContainerStyled marginBottom={marginBottom ? marginBottom : 30} marginTop={20}>
             <Grid>
@@ -22,8 +22,8 @@ export default function ButtonForm({ link, disabled, marginBottom, onClick, onCl
                     {link && <LinkRouter to={link}> <Button type="button" title={'Cancelar'} /> </LinkRouter>}
                     {!link && <Button type="button" title={'Cancelar'} onClick={onClickCancel} />}
                 </Container>
-                {!onClick && <Button type="submit" title={'salvar'} disabled={disabled} />}
-                {onClick && <Button type="button" title={'salvar'} disabled={disabled} onClick={onClick} />}
+                {!onClick && <Button title='salvar' disabled={disabled} />}
+                {onClick && <Button type="button" title='salvar' disabled={disabled} onClick={onClick} />}
             </Grid>
         </ContainerStyled>
     );

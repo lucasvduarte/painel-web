@@ -14,7 +14,7 @@ export const getByQuizzes = (id: string) => {
 }
 
 export const postQuizzes = (quizzes: Quizzes) => {
-    return http.post<Quizzes>(`${URL}/register/`, quizzes)
+    return http.post<Quizzes>(`${URL}`, quizzes)
 }
 
 export const deleteQuizzes = (id: string) => {

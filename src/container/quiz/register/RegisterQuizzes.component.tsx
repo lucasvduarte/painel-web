@@ -26,12 +26,12 @@ export default function RegisterQuizzes() {
         }
     }, [id]);
 
-    const onSubmit = (data: Quizzes) => {
-        id ? Edit(data) : Register(data);
+    const onSubmit = async (data: Quizzes) => {
+        await (id ? Edit(data) : Register(data));
     };
 
-    const Register = async (data: Quizzes) => {
-        await postQuizzes(data).then(res => {
+    const Register = (data: Quizzes): Promise<any> => {
+        return postQuizzes(data).then(res => {
             toast.success("Quiz foi cadastrado com sucesso!", { toastId: 'sucessQuizzes' });
             history.push('/quizzes/meus-quizzes');
         }).catch(error => {
@@ -39,8 +39,8 @@ export default function RegisterQuizzes() {
         });
     };
 
-    const Edit = async (data: Quizzes) => {
-        await putQuizzes(data).then(res => {
+    const Edit = (data: Quizzes): Promise<any> => {
+        return putQuizzes(data).then(res => {
             toast.success("Quiz foi atualizado com sucesso!", { toastId: 'sucessQuizzes' });
             history.push('/quizzes/meus-quizzes');
         }).catch(error => {

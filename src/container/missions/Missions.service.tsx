@@ -23,7 +23,7 @@ export const getSeeAnswerMissions = (id: string, idSeeAnswer: string) => {
 }
 
 export const postMissions = (missions: Missions) => {
-    return http.post<Missions>(`${URL}/register/`, missions)
+    return http.post<Missions>(`${URL}`, missions)
 }
 
 export const deleteMissions = (id: string) => {
@@ -32,4 +32,8 @@ export const deleteMissions = (id: string) => {
 
 export const putMissions = (missions: Missions) => {
     return http.put<Missions>(`${URL}/${missions._id}`, missions)
+}
+
+export const putSeeMyAnswer = (idMissions: string, idSeeAnswer: string, status: string) => {
+    return http.put<Missions>(`${URL}/${idMissions}/answers/${idSeeAnswer}`, status)
 }

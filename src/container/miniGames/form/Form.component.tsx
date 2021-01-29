@@ -30,11 +30,8 @@ const FormMiniGames = ({ handleSubmit, initialValues, isImages }: FormProps) => 
         }
     }
 
-
     return (
-        <Formik initialValues={initialValues} onSubmit={async (values: MiniGames) => {
-            await handleSubmit(values);
-        }} validationSchema={Validate} validateOnChange={false} >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate} validateOnChange={false} >
             {({ values, handleChange, errors, isSubmitting, setFieldValue }: FormikProps<MiniGames>) => (
                 <FormikForm>
                     <CardAccordion>

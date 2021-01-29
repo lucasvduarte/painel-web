@@ -18,9 +18,7 @@ const FormQuizzes = ({ handleSubmit, initialValues, request }: FormProps) => {
     }
 
     return (
-        <Formik initialValues={initialValues} onSubmit={async (values: Missions) => {
-            await handleSubmit(values);
-        }} validationSchema={Validate} validateOnChange={false} >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate} validateOnChange={false} >
             {({ values, handleChange, errors, setFieldValue, isSubmitting }: FormikProps<Missions>) => (
                 <FormikForm>
                     <CardAccordion>

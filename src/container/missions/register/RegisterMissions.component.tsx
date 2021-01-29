@@ -26,12 +26,12 @@ export default function RegisterMissions() {
         }
     }, [id]);
 
-    const onSubmit = (data: Missions) => {
-        id ? Edit(data) : Register(data);
+    const onSubmit = async (data: Missions) => {
+        await (id ? Edit(data) : Register(data));
     };
 
-    const Register = async (data: Missions) => {
-        await postMissions(data).then(res => {
+    const Register = (data: Missions): Promise<any> => {
+        return postMissions(data).then(res => {
             toast.success("Missão foi cadastrada com sucesso!", { toastId: 'sucessMissions' });
             history.push('/missoes/minhas-missoes');
         }).catch(error => {
@@ -39,8 +39,8 @@ export default function RegisterMissions() {
         });
     };
 
-    const Edit = async (data: Missions) => {
-        await putMissions(data).then(res => {
+    const Edit = (data: Missions): Promise<any> => {
+        return putMissions(data).then(res => {
             toast.success("Missão foi atualizada com sucesso!", { toastId: 'sucessMissions' });
             history.push('/missoes/minhas-missoes');
         }).catch(error => {

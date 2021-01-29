@@ -3,18 +3,18 @@ import { InterfacePagination } from './interface/UserPagination';
 import User from './interface/User';
 import { ResponsePagination } from "../../core/interfaces/ResponsePagination";
 
-const URL: string = 'users/';
+const URL: string = 'users';
 
 export const getUser = (params?: InterfacePagination) => {
     return http.get<ResponsePagination>(URL, { params: params })
 }
 
 export const getByUser = (id: string) => {
-    return http.get<User>(`${URL}${id}`)
+    return http.get<User>(`${URL}/${id}`)
 }
 
 export const postUser = (user: User) => {
-    return http.post<User>(`${URL}/register/`, user)
+    return http.post<User>(`${URL}/register`, user)
 }
 
 export const deleteUser = (id: string) => {
@@ -22,5 +22,5 @@ export const deleteUser = (id: string) => {
 }
 
 export const putUser = (user: User) => {
-    return http.put<User>(`${URL}${user._id}`, user)
+    return http.put<User>(`${URL}/${user._id}`, user)
 }

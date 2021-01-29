@@ -17,9 +17,7 @@ const FormItem = ({ handleSubmit, initialValues, request }: FormProps) => {
     }
 
     return (
-        <Formik initialValues={initialValues} onSubmit={async (values: Item) => {
-            await handleSubmit(values);
-        }} validationSchema={Validate} validateOnChange={false} >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate} validateOnChange={false} >
             {({ values, handleChange, errors, setFieldValue, isSubmitting }: FormikProps<Item>) => (
                 <FormikForm>
                     <CardAccordion>

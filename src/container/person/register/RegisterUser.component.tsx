@@ -26,12 +26,12 @@ export default function RegisterUser() {
         }
     }, [id]);
 
-    const onSubmit = (data: User) => {
-        id ? Edit(data) : Register(data);
+    const onSubmit = async (data: User) => {
+        await (id ? Edit(data) : Register(data));
     };
 
-    const Register = async (data: User) => {
-        await postUser(data).then(res => {
+    const Register = (data: User): Promise<any> => {
+        return postUser(data).then(res => {
             toast.success("Usuário foi cadastrado com sucesso!", { toastId: 'sucessUser' });
             history.push('/usuarios');
         }).catch(error => {
@@ -39,8 +39,8 @@ export default function RegisterUser() {
         });
     };
 
-    const Edit = async (data: User) => {
-        await putUser(data).then(res => {
+    const Edit = (data: User): Promise<any> => {
+        return putUser(data).then(res => {
             toast.success("Usuário foi Atualizado com sucesso!", { toastId: 'sucessUser' });
             history.push('/usuarios');
         }).catch(error => {

@@ -21,9 +21,7 @@ const FormPerson = ({ handleSubmit, initialValues, request, isRequired }: FormPr
     }
 
     return (
-        <Formik initialValues={initialValues} onSubmit={async (values: User) => {
-            await handleSubmit(values);
-        }} validationSchema={Validate(isRequired)} validateOnChange={false} >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate(isRequired)} validateOnChange={false} >
             {({ values, handleChange, errors, isSubmitting }: FormikProps<User>) => (
                 <FormikForm>
                     <CardAccordion>
@@ -44,8 +42,8 @@ const FormPerson = ({ handleSubmit, initialValues, request, isRequired }: FormPr
                                     name='email'
                                     value={values.email}
                                     onChange={handleChange('email')}
-                                    error={(!!errors.email)}
-                                    helperText={errors.email}
+                                    error={!values.email && !!errors.email}
+                                    helperText={!values.email && errors.email}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
@@ -65,8 +63,8 @@ const FormPerson = ({ handleSubmit, initialValues, request, isRequired }: FormPr
                                     type="password"
                                     value={values.confirmPassword}
                                     onChange={handleChange('confirmPassword')}
-                                    error={!!errors.confirmPassword}
-                                    helperText={errors.confirmPassword}
+                                    error={(values.confirmPassword !== values.password) && !!errors.confirmPassword}
+                                    helperText={(values.confirmPassword !== values.password) && errors.confirmPassword}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} >
