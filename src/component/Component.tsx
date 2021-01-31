@@ -6,7 +6,6 @@ import ButtonForm from './button/ButtonForm.component';
 import ButtonSearch from './button/ButtonSearch.component';
 import ButtonImport from './button/ButtonImport.component';
 import { ContainerStyled } from './container/Container';
-import Drawer from './drawer/Drawer.component';
 import { FormInput, FormInputNumber, FormInputMultiline, FormSelect, ContainerRadio, LabelForm, FormRadio, FormControlRadio, DatePicker } from './form/InputStyle';
 import HeaderC from './header/Header.component';
 import HeaderRegisterC from './header/HeaderRegister.component';
@@ -25,7 +24,7 @@ import ButtonHome from './button/ButtonHome.component';
 import MenuPages from './menu/Menu.component';
 import { Image } from './img/Img';
 
-export const Menu = { Drawer, AppBar, ToolBar, Main, MenuPages, Hearder };
+export const Menu = { AppBar, ToolBar, Main, MenuPages, Hearder };
 export const Container = ContainerStyled;
 export const Form = { FormInput, FormInputNumber, FormInputMultiline, FormSelect, ContainerRadio, LabelForm, FormRadio, FormControlRadio, DatePicker };
 export const Header = HeaderC;

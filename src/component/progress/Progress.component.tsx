@@ -1,25 +1,21 @@
 import React from 'react';
-import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
-        color: '#fff',
-    },
-}));
+import Fade from '@material-ui/core/Fade';
+import Grid from '../grid/GridComponent.component';
 
 interface Props {
     open: boolean;
 }
 
-export default function SimpleBackdrop({ open }: Props) {
-    const classes = useStyles();
+export default function Progress({ open }: Props) {
 
     return (
-        <Backdrop className={classes.backdrop} open={open} >
-            <CircularProgress color="inherit" />
-        </Backdrop>
+        <Grid justify="center" alignItems="center">
+            <div style={{ height: 40 }}>
+                <Fade in={open} unmountOnExit >
+                    <CircularProgress color="secondary" />
+                </Fade>
+            </div>
+        </Grid>
     );
 }

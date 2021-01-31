@@ -15,7 +15,7 @@ export default function SimpleAccordion({ children, title }: Props) {
 
     const [expanded, setExpanded] = useState<string | boolean>('');
 
-    const handleChange = (panel: string) => (event: ChangeEvent<{}>, newExpanded: boolean) => {
+    const handleChange = (panel: string) => (_event: ChangeEvent<{}>, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);
     };
 

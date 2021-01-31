@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-type Props = {
+interface Props {
     children?: ReactNode;
 }
 

@@ -6,7 +6,7 @@ import { TabInterface } from './TabsInterface';
 import TabPanel from './TabPanel.component';
 
 export default function CenteredTabs({ tabValue, nameTabs, children, disabled }: TabInterface) {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState<number>(0);
     const [open, setOpen] = useState<boolean>(true);
 
     useLayoutEffect(() => {
