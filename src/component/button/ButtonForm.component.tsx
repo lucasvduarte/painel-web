@@ -14,7 +14,6 @@ type Props = {
 }
 
 export default function ButtonForm({ link, disabled, marginBottom, onClick, onClickCancel }: Props) {
-    console.log(disabled)
     return (
         <ContainerStyled marginBottom={marginBottom ? marginBottom : 30} marginTop={20}>
             <Grid>

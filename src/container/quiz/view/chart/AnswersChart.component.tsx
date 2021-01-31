@@ -40,14 +40,14 @@ export default function Grafico() {
                     <YAxis tickCount={6} />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="markedQuantity" stackId="a" fill="red" name="Respostas Erradas" >
+                    <Bar dataKey="markedQuantity" stackId="a" fill="#FF0000" name="Respostas Erradas" >
                         {
                             data.answers.map((entry: any, index: number) => (
-                                <Cell cursor="pointer" fill={index === data.correctAnswer ? 'green' : 'red'} key={`cell-${index}`} />
+                                <Cell cursor="pointer" fill={index === data.correctAnswer ? '#01B158' : '#FF0000'} key={`cell-${index}`} />
                             ))
                         }
                     </Bar>
-                    <Bar dataKey="values" stackId="a" fill="green" name="Resposta Certa" />
+                    <Bar dataKey="values" stackId="a" fill="#01B158" name="Resposta Certa" />
                 </BarChart>
             </ResponsiveContainer>
 

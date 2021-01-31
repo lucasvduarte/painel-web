@@ -5,13 +5,15 @@ import { Action, ACTION_EDIT, ACTION_DELETE } from '../../component/table/interf
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getUser, deleteUser } from './User.service';
-import { toast } from "react-toastify";
+import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/UserPagination';
 import User from './interface/User';
 import { authentication } from '../../core/auth/Authentication';
 
 export default function UserComponent() {
+
     let history = useHistory();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [user, setUser] = useState<Array<User>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
@@ -61,9 +63,9 @@ export default function UserComponent() {
 
     const handleClickDelete = async () => {
         await deleteUser(openModalDelete).then(res => {
-            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteUser' });
+            setSnackbar({ ...snackbar, msg: "Usuário excluído com sucesso!", type: 'success' });
         }).catch(error => {
-            toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao excluir usuário!", type: 'error' });
         }).finally(function () {
             setRequest(true);
             handleClickModalDelete('');

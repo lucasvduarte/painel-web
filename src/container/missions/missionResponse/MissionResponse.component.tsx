@@ -8,7 +8,7 @@ import MissionsStatus from '../interface/MissionsStatus';
 import Maps from '../../gameMap/component/Maps.component';
 import { Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useSnackbar } from '../../../context/Snackbar';
 import Missions from '../interface/Missions';
 import Form from './Form.component';
 
@@ -17,6 +17,7 @@ const statusRejected: any = { status: "Rejeitado", imp: 0, people: 0 };
 export default function View({ allMissions }: MissionsInterface) {
 
     let { id, secondaryId } = useParams<ParamTypes>();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [seeAnswerMissions, setSeeAnswerMissions] = useState<MissionsStatus>();
     const [request, setRequest] = useState<boolean>(true);
     const [approved, setApproved] = useState<boolean>(false);
@@ -92,14 +93,13 @@ export default function View({ allMissions }: MissionsInterface) {
     const handleSubmit = async (event: any) => {
         setRequest(true);
         await putSeeMyAnswer(id, secondaryId || '', event).then((res) => {
-            toast.success(`Missão ${event.status} com sucesso`);
+            setSnackbar({ ...snackbar, msg: `Missão ${event.status} com sucesso!`, type: 'success' });
         }).catch((error) => {
-            toast.error(`Erro ao ${event.status} Missão`);
+            setSnackbar({ ...snackbar, msg: `Erro ao ${event.status} Missão`, type: 'error' });
         }).finally(function () {
             setRequest(false);
         });
     };
-
 
     const Entrepreneurial = () => {
 

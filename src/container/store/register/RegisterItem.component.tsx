@@ -6,13 +6,14 @@ import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { getByStore, postStore, putStore } from '../Store.service';
 import { useParams } from "react-router";
 import ParamTypes from '../../../core/interfaces/ParamTypes';
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from '../../../context/Snackbar';
 
 export default function RegisterItem() {
 
     let history = useHistory();
     let { id } = useParams<ParamTypes>();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [person, setPerson] = useState<Item>(INITIAL_VALUES);
     const [request, setRequest] = useState<boolean>(true);
 
@@ -32,19 +33,19 @@ export default function RegisterItem() {
 
     const Register = (data: Item): Promise<any> => {
         return postStore(data).then(res => {
-            toast.success("Item foi cadastrado!", { toastId: 'sucessItem' });
+            setSnackbar({ ...snackbar, msg: "Item foi cadastrado!", type: 'success' });
             history.push('/Item/meus-Item');
         }).catch(error => {
-            toast.error("Item não foi cadastrado!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Item não foi cadastrado!", type: 'error' });
         });
     };
 
     const Edit = (data: Item): Promise<any> => {
         return putStore(data).then(res => {
-            toast.success("Item foi Atualizado!", { toastId: 'sucessItem' });
+            setSnackbar({ ...snackbar, msg: "Item foi Atualizado!", type: 'success' });
             history.push('/Item/meus-Item');
         }).catch(error => {
-            toast.error("Item não foi Atualizado!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Item não foi Atualizado!", type: 'error' });
         });
     };
 

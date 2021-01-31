@@ -7,11 +7,12 @@ import { putUser, getByUser, postUser } from '../User.service';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import ParamTypes from '../../../core/interfaces/ParamTypes';
-import { toast } from "react-toastify";
+import { useSnackbar } from '../../../context/Snackbar';
 
 export default function RegisterUser() {
 
     let history = useHistory();
+    const { snackbar, setSnackbar } = useSnackbar();
     let { id } = useParams<ParamTypes>();
     const [person, setPerson] = useState<User>(INITIAL_VALUES);
     const [request, setRequest] = useState<boolean>(true);
@@ -32,19 +33,18 @@ export default function RegisterUser() {
 
     const Register = (data: User): Promise<any> => {
         return postUser(data).then(res => {
-            toast.success("Usuário foi cadastrado com sucesso!", { toastId: 'sucessUser' });
-            history.push('/usuarios');
+            setSnackbar({ ...snackbar, msg: "Usuário foi cadastrado com sucesso!", type: 'success' });
         }).catch(error => {
-            toast.error("Erro ao cadastrar usuário!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar usuário!", type: 'error' });
         });
     };
 
     const Edit = (data: User): Promise<any> => {
         return putUser(data).then(res => {
-            toast.success("Usuário foi Atualizado com sucesso!", { toastId: 'sucessUser' });
+            setSnackbar({ ...snackbar, msg: "Usuário foi Atualizado com sucesso!", type: 'success' });
             history.push('/usuarios');
         }).catch(error => {
-            toast.error("Erro ao atualizar usuário!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao atualizar usuário!", type: 'error' });
         });
     };
 

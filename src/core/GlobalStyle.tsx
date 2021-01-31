@@ -17,13 +17,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-   .Toastify__toast--success {
-    background: #01B158;
-  }
-
-  .Toastify__toast--error {
-    background: #FF0000;
-  }
 
   .MuiInputBase-formControl {
     background: #FFFFFF;

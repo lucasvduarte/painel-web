@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useSnackbar } from '../../context/Snackbar';
 import { getToken } from "../auth/auth";
 
 const TIMEOUT_ERROR_MESSAGE = 'timeoutErrorMessage';
@@ -29,14 +29,13 @@ instance.interceptors.response.use(
 		return response;
 	},
 	(error) => {
+		const { snackbar, setSnackbar } = useSnackbar();
+
 		if (error.message === TIMEOUT_ERROR_MESSAGE || error.code === 'ECONNABORTED') {
-			toast.error('Tempo de requisição limite excedido!', {
-				toastId: TIMEOUT_ERROR_MESSAGE,
-			});
+			setSnackbar({ ...snackbar, msg: "Tempo de requisição limite excedido!", type: 'error' });
+
 		} else if (error) {
-			toast.error('Erro Interno. Por favor, contate o administrador.', {
-				toastId: TIMEOUT_ERROR_MESSAGE,
-			});
+			setSnackbar({ ...snackbar, msg: "Erro Interno. Por favor, contate o administrador!", type: 'error' });
 		}
 
 		return Promise.reject(error);

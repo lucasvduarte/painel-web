@@ -6,13 +6,14 @@ import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { getByMissions, postMissions, putMissions } from '../Missions.service';
 import { useParams } from "react-router";
 import ParamTypes from '../../../core/interfaces/ParamTypes';
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from '../../../context/Snackbar';
 
 export default function RegisterMissions() {
 
     let history = useHistory();
     let { id } = useParams<ParamTypes>();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [person, setPerson] = useState<Missions>(INITIAL_VALUES);
     const [request, setRequest] = useState<boolean>(true);
 
@@ -32,19 +33,19 @@ export default function RegisterMissions() {
 
     const Register = (data: Missions): Promise<any> => {
         return postMissions(data).then(res => {
-            toast.success("Missão foi cadastrada com sucesso!", { toastId: 'sucessMissions' });
+            setSnackbar({ ...snackbar, msg: "Missão foi cadastrada com sucesso", type: 'success' });
             history.push('/missoes/minhas-missoes');
         }).catch(error => {
-            toast.error("Erro ao cadastrar missão!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar missão!", type: 'error' });
         });
     };
 
     const Edit = (data: Missions): Promise<any> => {
         return putMissions(data).then(res => {
-            toast.success("Missão foi atualizada com sucesso!", { toastId: 'sucessMissions' });
+            setSnackbar({ ...snackbar, msg: "Missão foi atualizada com sucesso!", type: 'success' });
             history.push('/missoes/minhas-missoes');
         }).catch(error => {
-            toast.error("Erro ao atualizar missão!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao atualizar missão!", type: 'error' });
         });
     };
 

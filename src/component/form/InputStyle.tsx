@@ -76,7 +76,7 @@ export const ContainerRadio = styled.div`
 export const LabelForm = styled.p`
     margin-top: -11px; 
     text-align: left;
-    max-width: ${(props: Props) => `${props.maxWidth ? props.maxWidth : 35}px`};  
+    max-width: ${(props: Props) => `${props.maxWidth || 35}px`};  
     font-size: 12px;
     margin-left: 6px;
     color:#5a5a5a;

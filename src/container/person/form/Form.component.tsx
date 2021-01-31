@@ -6,13 +6,7 @@ import { FormProps } from '../interface/Form';
 import { Grid, FormControl, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
 import User from '../interface/User';
 import { Validate } from '../utils/Validate';
-
-const arrayType: Array<any> = [
-    { id: 'professor', label: 'Professor' },
-    { id: 'estudante', label: 'Estudante' },
-    { id: 'gestor', label: 'Gestor' },
-    { id: 'usuarioComum', label: 'Usuário Comum' },
-]
+import { arrayType } from '../utils/ArrayType';
 
 const FormPerson = ({ handleSubmit, initialValues, request, isRequired }: FormProps) => {
 

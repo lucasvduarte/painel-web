@@ -1,7 +1,7 @@
 import 'date-fns';
 import React from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { Button, Progress, Form, CardAccordion } from "../../../component/Component";
+import { Button, Form, CardAccordion } from "../../../component/Component";
 import { Grid } from '@material-ui/core';
 
 const FormMissions = ({ handleSubmit, initialValues }: any) => {

@@ -7,8 +7,8 @@ export interface Props {
 }
 
 export const Image = styled.img`
-    width: ${(props: Props) => `${props.width ? props.width : 200}px`}; 
-    height: ${(props: Props) => `${props.height ? props.height : 150}px`};
+    width: ${(props: Props) => `${props.width || 200}px`}; 
+    height: ${(props: Props) => `${props.height || 150}px`};
     margin: 5px; 
-    border-radius: ${(props: Props) => `${props.borderRadius ? props.borderRadius : 0}px`};
+    border-radius: ${(props: Props) => `${props.borderRadius || 0}px`};
 `;

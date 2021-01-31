@@ -6,13 +6,14 @@ import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { getByQuizzes, postQuizzes, putQuizzes } from '../Quizzes.service';
 import { useParams } from "react-router";
 import ParamTypes from '../../../core/interfaces/ParamTypes';
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from '../../../context/Snackbar';
 
 export default function RegisterQuizzes() {
 
     let history = useHistory();
     let { id } = useParams<ParamTypes>();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [person, setPerson] = useState<Quizzes>(INITIAL_VALUES);
     const [request, setRequest] = useState<boolean>(true);
 
@@ -32,19 +33,19 @@ export default function RegisterQuizzes() {
 
     const Register = (data: Quizzes): Promise<any> => {
         return postQuizzes(data).then(res => {
-            toast.success("Quiz foi cadastrado com sucesso!", { toastId: 'sucessQuizzes' });
+            setSnackbar({ ...snackbar, msg: "Quiz foi cadastrado com sucesso!", type: 'success' });
             history.push('/quizzes/meus-quizzes');
         }).catch(error => {
-            toast.error("Erro ao cadastrar quiz!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar quiz!", type: 'error' });
         });
     };
 
     const Edit = (data: Quizzes): Promise<any> => {
         return putQuizzes(data).then(res => {
-            toast.success("Quiz foi atualizado com sucesso!", { toastId: 'sucessQuizzes' });
+            setSnackbar({ ...snackbar, msg: "Quiz foi atualizado com sucesso!", type: 'success' });
             history.push('/quizzes/meus-quizzes');
         }).catch(error => {
-            toast.error("Erro ao atualizar usuário!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao atualizar usuário!", type: 'error' });
         });
     };
 

@@ -5,7 +5,7 @@ import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getQuizzes, deleteQuizzes } from './Quizzes.service';
-import { toast } from "react-toastify";
+import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/QuizzesPagination';
 import Quizzes from './interface/Quizzes';
 import { QuizzesInterface } from './interface/QuizzesComponent';
@@ -15,6 +15,7 @@ import { authentication } from '../../core/auth/Authentication';
 export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
     let history = useHistory();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [quizzes, setQuizzes] = useState<Array<Quizzes>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
@@ -69,9 +70,9 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
     const handleClickDelete = async () => {
         await deleteQuizzes(openModalDelete).then(res => {
-            toast.success("Quiz excluído com sucesso!", { toastId: 'sucessDeleteQuizzes' });
+            setSnackbar({ ...snackbar, msg: "Quiz excluído com sucesso!", type: 'success' });
         }).catch(error => {
-            toast.error("Erro ao excluir quiz!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao excluir quiz!", type: 'error' });
         }).finally(function () {
             setRequest(true);
             handleClickModalDelete('');

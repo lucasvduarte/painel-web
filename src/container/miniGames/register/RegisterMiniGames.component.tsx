@@ -4,19 +4,20 @@ import Form from '../form/Form.component';
 import MiniGames from '../interface/MiniGames';
 import { INITIAL_VALUES } from '../utils/INITIAL_VALUES';
 import { postMiniGamesMemories } from '../MiniGames.service';
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from '../../../context/Snackbar';
 
 export default function RegisterMiniGames() {
 
     let history = useHistory();
+    const { snackbar, setSnackbar } = useSnackbar();
 
     const onSubmit = async (data: MiniGames) => {
         await postMiniGamesMemories(data).then(res => {
-            toast.success("MiniGame foi cadastrado com sucesso!", { toastId: 'sucessMiniGames' });
+            setSnackbar({ ...snackbar, msg: "MiniGame foi cadastrado com sucesso!", type: 'success' });
             history.push('/minigames/memoria');
         }).catch(error => {
-            toast.error("Erro ao cadastrar MiniGame!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar MiniGame!", type: 'error' });
         });
     };
 

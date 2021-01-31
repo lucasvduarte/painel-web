@@ -5,7 +5,7 @@ import { Action, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interf
 import { HEAD_CELL } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getMiniGamesMemories, deleteMiniGamesMemories } from './MiniGames.service';
-import { toast } from "react-toastify";
+import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/MiniGamesPagination';
 import MiniGames from './interface/MiniGames';
 import { authentication } from '../../core/auth/Authentication';
@@ -13,6 +13,7 @@ import { authentication } from '../../core/auth/Authentication';
 export default function MiniGamesComponent() {
 
     let history = useHistory();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [miniGames, setMiniGames] = useState<Array<MiniGames>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
@@ -61,9 +62,9 @@ export default function MiniGamesComponent() {
     const handleClickDelete = async () => {
         setRequest(true)
         await deleteMiniGamesMemories(openModalDelete).then(res => {
-            toast.success("Registro excluído com sucesso!", { toastId: 'sucessDeleteMiniGamesMemories' });
+            setSnackbar({ ...snackbar, msg: "MiniGame excluído com sucesso!", type: 'success' });
         }).catch(error => {
-            toast.error("O registro não pode ser removido enquanto estiver em uso.", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao excluir MiniGame!", type: 'error' });
         }).finally(function () {
             handleClickModalDelete('');
             setRequest(false)

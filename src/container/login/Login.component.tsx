@@ -4,17 +4,19 @@ import { useHistory } from "react-router-dom";
 import FormLogin from './form/Form.component';
 import { postLogin } from './Login.service';
 import Login from './interface/Login';
-import { toast } from "react-toastify";
 import { INITIAL_VALUES } from './utils/INITIAL_VALUES';
 import logo from "../../assets/images.png";
 import { Grid } from '@material-ui/core';
 import { Img } from './Image';
 import { login } from '../../core/auth/auth';
 import { Response } from "../../core/auth/Response";
+import { useSnackbar } from '../../context/Snackbar';
+
 export default function LoginComponent() {
 
     let history = useHistory();
     const [request, setRequest] = useState(false);
+    const { snackbar, setSnackbar } = useSnackbar();
     const [user, setUser] = useState<Login>(INITIAL_VALUES);
 
     const canAccess = (user: Response) => {
@@ -22,7 +24,7 @@ export default function LoginComponent() {
             login(user);
             history.push("/");
         } else {
-            toast.success("Email ou senha incorretas", { toastId: 'errorUser' });
+            setSnackbar({ ...snackbar, msg: "Email ou senha incorretas!", type: 'error' });
         }
     }
 
@@ -32,7 +34,7 @@ export default function LoginComponent() {
         await postLogin(user).then(res => {
             canAccess(res.data);
         }).catch(error => {
-            toast.error("Email ou senha incorretas", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Email ou senha incorretas!", type: 'error' });
         }).finally(() => {
             setRequest(false);
         });

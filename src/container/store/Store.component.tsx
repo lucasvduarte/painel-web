@@ -3,7 +3,6 @@ import { Header, Table } from '../../component/Component';
 import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
 import { useHistory } from "react-router-dom";
 import { getStore } from './Store.service';
-import { toast } from "react-toastify";
 import { InterfacePagination } from './interface/StorePagination';
 import Item from './interface/Item';
 import { StoreInterface } from './interface/StoreComponent';
@@ -26,7 +25,7 @@ export default function StoreComponent({ isPupils }: StoreInterface) {
         }).finally(function () {
             setRequest(false)
         });
-    }, [pagination, request]);
+    }, [pagination, request, isPupils]);
 
 
     const setData = (data: Array<Item>, isPupils?: boolean) => {

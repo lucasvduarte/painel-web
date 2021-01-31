@@ -5,7 +5,7 @@ import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
 import { getMissions, deleteMissions } from './Missions.service';
-import { toast } from "react-toastify";
+import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/MissionsPagination';
 import Missions from './interface/Missions';
 import { MissionsInterface } from './interface/MissionsComponent';
@@ -15,6 +15,7 @@ import { authentication } from '../../core/auth/Authentication';
 export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
     let history = useHistory();
+    const { snackbar, setSnackbar } = useSnackbar();
     const [missions, setMissions] = useState<Array<Missions>>([]);
     const [openModalDelete, setOpenModalDelete] = useState<string>('');
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
@@ -27,6 +28,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
         if (!allMissions) {
             paginationAux._user = getToken()._id;
         }
+
         getMissions(paginationAux).then(res => {
             if (res.data) {
                 setMissions(res.data.docs);
@@ -35,7 +37,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
         }).finally(function () {
             setRequest(false)
         });
-    }, [pagination, request]);
+    }, [allMissions, pagination, request]);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: string) => {
         const isAsc = pagination.sort === property && pagination.order === 1;
@@ -72,9 +74,9 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
     const handleClickDelete = async () => {
         await deleteMissions(openModalDelete).then(res => {
-            toast.success("Missão excluída com sucesso!", { toastId: 'sucessDeleteMissions' });
+            setSnackbar({ ...snackbar, msg: "Missão excluída com sucesso!", type: 'success' });
         }).catch(error => {
-            toast.error("Erro ao excluir missão!", { toastId: error.message });
+            setSnackbar({ ...snackbar, msg: "Erro ao excluir missão!", type: 'error' });
         }).finally(function () {
             setRequest(true);
             handleClickModalDelete('');
