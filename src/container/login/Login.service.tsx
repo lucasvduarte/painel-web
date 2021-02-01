@@ -4,6 +4,6 @@ import User from './interface/Login';
 
 const URL: string = 'users/auth';
 
-export const postLogin = (user: User) => {
+export const authService = (user: User) => {
     return http.post<Response>(URL, user)
 }

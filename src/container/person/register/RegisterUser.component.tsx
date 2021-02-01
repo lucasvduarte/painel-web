@@ -28,24 +28,13 @@ export default function RegisterUser() {
     }, [id]);
 
     const onSubmit = async (data: User) => {
-        await (id ? Edit(data) : Register(data));
-    };
-
-    const Register = (data: User): Promise<any> => {
-        return postUser(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Usuário foi cadastrado com sucesso!", type: 'success' });
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar usuário!", type: 'error' });
-        });
-    };
-
-    const Edit = (data: User): Promise<any> => {
-        return putUser(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Usuário foi Atualizado com sucesso!", type: 'success' });
-            history.push('/usuarios');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Erro ao atualizar usuário!", type: 'error' });
-        });
+        try {
+            await (id ? putUser(data) : postUser(data));
+            setSnackbar({ ...snackbar, msg: `Usuário foi ${id ? 'atualizado' : 'cadastrado'} com sucesso!`, type: 'success' });
+            history.push(`/usuarios${id ? '' : '/novo-usuario'}`);
+        } catch (error) {
+            setSnackbar({ ...snackbar, msg: `Erro ao ${id ? 'atualizar' : 'cadastrar'} usuário!`, type: 'error' });
+        }
     };
 
     return (

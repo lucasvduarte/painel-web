@@ -28,25 +28,13 @@ export default function RegisterMissions() {
     }, [id]);
 
     const onSubmit = async (data: Missions) => {
-        await (id ? Edit(data) : Register(data));
-    };
-
-    const Register = (data: Missions): Promise<any> => {
-        return postMissions(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Missão foi cadastrada com sucesso", type: 'success' });
-            history.push('/missoes/minhas-missoes');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar missão!", type: 'error' });
-        });
-    };
-
-    const Edit = (data: Missions): Promise<any> => {
-        return putMissions(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Missão foi atualizada com sucesso!", type: 'success' });
-            history.push('/missoes/minhas-missoes');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Erro ao atualizar missão!", type: 'error' });
-        });
+        try {
+            await (id ? putMissions(data) : postMissions(data));
+            setSnackbar({ ...snackbar, msg: `Missão foi ${id ? 'atualizada' : 'cadastrada'} com sucesso!`, type: 'success' });
+            history.push(`/missoes/minhas-missoes${id ? '' : '/nova-missao'}`);
+        } catch (error) {
+            setSnackbar({ ...snackbar, msg: `Erro ao ${id ? 'atualizar' : 'cadastrar'} missão!`, type: 'error' });
+        }
     };
 
     return (

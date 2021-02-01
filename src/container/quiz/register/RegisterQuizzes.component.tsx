@@ -28,25 +28,13 @@ export default function RegisterQuizzes() {
     }, [id]);
 
     const onSubmit = async (data: Quizzes) => {
-        await (id ? Edit(data) : Register(data));
-    };
-
-    const Register = (data: Quizzes): Promise<any> => {
-        return postQuizzes(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Quiz foi cadastrado com sucesso!", type: 'success' });
-            history.push('/quizzes/meus-quizzes');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Erro ao cadastrar quiz!", type: 'error' });
-        });
-    };
-
-    const Edit = (data: Quizzes): Promise<any> => {
-        return putQuizzes(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Quiz foi atualizado com sucesso!", type: 'success' });
-            history.push('/quizzes/meus-quizzes');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Erro ao atualizar usuário!", type: 'error' });
-        });
+        try {
+            await (id ? putQuizzes(data) : postQuizzes(data));
+            setSnackbar({ ...snackbar, msg: `Quiz foi ${id ? 'atualizado' : 'cadastrado'} com sucesso!`, type: 'success' });
+            history.push(`/quizzes/meus-quizzes${id ? '' : '/novo-quiz'}`);
+        } catch (error) {
+            setSnackbar({ ...snackbar, msg: `Erro ao ${id ? 'atualizar' : 'cadastrar'} quiz!`, type: 'error' });
+        }
     };
 
     return (

@@ -13,12 +13,13 @@ export default function RegisterMiniGames() {
     const { snackbar, setSnackbar } = useSnackbar();
 
     const onSubmit = async (data: MiniGames) => {
-        await postMiniGamesMemories(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "MiniGame foi cadastrado com sucesso!", type: 'success' });
+        try {
+            await postMiniGamesMemories(data);
+            setSnackbar({ ...snackbar, msg: 'MiniGame foi cadastrado com sucesso', type: 'success' });
             history.push('/minigames/memoria');
-        }).catch(error => {
+        } catch (error) {
             setSnackbar({ ...snackbar, msg: "Erro ao cadastrar MiniGame!", type: 'error' });
-        });
+        }
     };
 
     return (
