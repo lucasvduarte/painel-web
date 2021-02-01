@@ -51,7 +51,7 @@ export const Title = styled(({ ...props }) => (
     font-size: 18px; 
     margin-right: 10px;
     transition: 0.2s ease-in;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         font-size: 16px;
         transition: 0.2s ease-in;
     }

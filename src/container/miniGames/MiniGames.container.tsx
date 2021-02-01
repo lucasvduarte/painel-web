@@ -9,7 +9,7 @@ const Routes = () => {
         <Switch>
             <Route exact path="/minigames/memoria" component={MiniGames} />
             <Route exact path="/minigames/novo-minigame-memoria" component={Register} />
-            <Route exact path="/minigames/meus-MiniGames/informacao-memoria/:id" component={Register} />
+            <Route exact path="/minigames/meus-MiniGames/visualizar-minigames/:id" component={Register} />
         </Switch>
     );
 

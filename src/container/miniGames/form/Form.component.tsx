@@ -44,6 +44,7 @@ const FormMiniGames = ({ handleSubmit, initialValues, isImages }: FormProps) => 
                                     onChange={handleChange('title')}
                                     error={(values.title.length < 3) && !!errors.title}
                                     helperText={(values.title.length < 3) && errors.title}
+                                    disabled={!!values?._id}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -54,6 +55,7 @@ const FormMiniGames = ({ handleSubmit, initialValues, isImages }: FormProps) => 
                                     onChange={handleChange('description')}
                                     error={(values.description.length < 3) && !!errors.description}
                                     helperText={(values.description.length < 3) && errors.description}
+                                    disabled={!!values?._id}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -65,6 +67,7 @@ const FormMiniGames = ({ handleSubmit, initialValues, isImages }: FormProps) => 
                                     onChange={handleChange('lux')}
                                     error={!!errors.lux}
                                     helperText={(values.lux < 3) && errors.lux}
+                                    disabled={!!values?._id}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -76,35 +79,38 @@ const FormMiniGames = ({ handleSubmit, initialValues, isImages }: FormProps) => 
                                     onChange={handleChange('resources')}
                                     error={!!errors.resources}
                                     helperText={(values.resources < 3) && errors.resources}
+                                    disabled={!!values?._id}
                                 />
                             </Grid>
 
                             <Grid item xs={12}>
                                 <Form.ContainerRadio>
                                     <Form.LabelForm maxWidth={140}>Visibilidade do miniGame</Form.LabelForm>
-                                    <Form.FormRadio name='is_public' value={values.is_public} onChange={handleChange('is_public')}>
+                                    <Form.FormRadio name='is_public' value={values.is_public} onChange={handleChange('is_public')} >
                                         <Form.FormControlRadio
                                             value={true}
                                             checked={values.is_public === true || values.is_public === 'true'}
                                             label='Público'
+                                            disabled={!!values?._id}
                                         />
                                         <Form.FormControlRadio
                                             value={false}
                                             checked={values.is_public === false || values.is_public === 'false'}
                                             label='Privado'
+                                            disabled={!!values?._id}
                                         />
                                     </Form.FormRadio>
                                 </Form.ContainerRadio>
                             </Grid>
                             <Grid item xs={12}>
-                                {isImages && <Button.ButtonImport onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeImg(setFieldValue, event, values.images || [])} />}
+                                {isImages && <Button.ButtonImport onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeImg(setFieldValue, event, values.images || [])} disabled={!!values?._id} />}
                                 {values.images && values.images.map((obj: any, index: number) => {
                                     return <Img src={obj} alt={`image-${index}`} key={index} borderRadius={12} />
                                 })}
                             </Grid>
                         </Grid>
 
-                        <Button.ButtonForm link="/minigames/memoria" disabled={isSubmitting} />
+                        <Button.ButtonForm link="/minigames/memoria" disabled={isSubmitting || !!values?._id} />
                     </CardAccordion>
                 </FormikForm>
             )}

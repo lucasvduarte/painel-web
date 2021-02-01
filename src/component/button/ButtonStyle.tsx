@@ -25,7 +25,7 @@ export const FabButton = styled(({ ...props }) => (
       left: 40px;
       z-index: 1;
       transition: 0.2s ease-in;
-      @media (max-width: 500px) {
+      @media (max-width: 600px) {
         bottom: 30px;
         right: 30px;
         transition: 0.2s ease-in;

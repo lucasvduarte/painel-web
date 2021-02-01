@@ -55,7 +55,7 @@ export default function MiniGamesComponent() {
             return handleClickModalDelete(miniGames._id);
         }
         if (action === ACTION_VIEW) {
-            return history.push(`/minigames/visualizar-minigames/${miniGames._id}`);
+            return history.push(`/minigames/meus-MiniGames/visualizar-minigames/${miniGames._id}`);
         }
     };
 

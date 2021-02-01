@@ -33,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
   .gm-style .gm-style-iw-c {
     padding: 0 !important;
     transition: 0.2s ease-in;
-    @media (max-width: 500px) { 
+    @media (max-width: 600px) { 
       transition: 0.2s ease-in;
       max-width: 350px !important;
     }

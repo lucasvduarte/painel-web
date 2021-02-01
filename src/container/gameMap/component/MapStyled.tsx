@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div` 
     margin: 20px; 
     transition: 0.2s ease-in; 
-    @media (max-width: 500px) { 
+    @media (max-width: 600px) { 
         margin: 20px 10px 10px 10px; 
         transition: 0.2s ease-in;
     }
@@ -17,7 +17,7 @@ export const H2 = styled.div`
     font-weight: 700;
     text-transform: uppercase;
     transition: 0.2s ease-in;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         font-size: 18px;
         transition: 0.2s ease-in;
     }
@@ -27,7 +27,7 @@ export const Span = styled.div`
     font-size: 14px;
     font-weight:600;
     transition: 0.2s ease-in;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         font-size: 12px;
         transition: 0.2s ease-in;
     }

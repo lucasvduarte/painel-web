@@ -8,7 +8,7 @@ export const NamePage = styled.span`
     font-weight: 900;
     text-transform: uppercase;
     transition: 0.2s ease-in; 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         font-size: 20px; 
         transition: 0.2s ease-in;
     }
@@ -24,7 +24,7 @@ export const SubPage = styled.span`
     transition: 0.2s ease-in; 
     margin-left: 20px;
     padding-left: 20px;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         font-size: 14px;
         margin-left: 8px;
         padding-left: 8px;
@@ -36,7 +36,7 @@ export const Header = styled.div`
     font-size: 1.7em;  
     font-weight: 500;
     transition: 0.2s ease-in;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         font-size: 1.4em; 
         margin-left: 10px; 
         transition: 0.2s ease-in;
@@ -47,7 +47,7 @@ export const HeaderForm = styled.div`
     margin-left: 30px; 
     margin-right: 30px;
     transition: 0.2s ease-in;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
         margin-left: 15px; 
         margin-right: 15px;
         transition: 0.2s ease-in;
