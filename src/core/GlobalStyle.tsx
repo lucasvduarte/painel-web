@@ -22,6 +22,19 @@ export const GlobalStyle = createGlobalStyle`
     background: #FFFFFF;
   }
 
+  .Mui-focused, .MuiOutlinedInput-root fieldset {
+    color: black !important;
+    border-color: #5a5a5a !important;
+  }
+
+  .MuiFormControl-root:hover fieldset { 
+    border-color: white !important; 
+  }
+
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline  {
+    border-color: #5a5a5a !important;
+  }
+  
   .recharts-tooltip-cursor {
     fill: rgba(0,0,0,0)
   }

@@ -11,6 +11,7 @@ import {
 
 interface Props {
     maxWidth?: number;
+    correctHeight?: boolean
 }
 
 export const FormInput = styled(({ ...props }) => (
@@ -32,7 +33,12 @@ export const FormInputNumber = styled(({ ...props }) => (
 `;
 
 export const FormSelect = styled(({ ...props }) => (
-    <Select fullWidth displayEmpty variant="outlined" labelId="demo-select-label" id="demo-select" {...props} />
+    <Select fullWidth displayEmpty variant="outlined" labelId="demo-select-label" id="demo-select"
+        inputProps={{
+            name: 'age',
+            id: 'age-native-simple',
+        }}
+        {...props} />
 ))` 
     &&{  
         background-color: #FFFFFF;
@@ -64,23 +70,26 @@ export const DatePicker = styled(({ ...props }) => (
 `;
 
 export const ContainerRadio = styled.div`
-    border : 1px solid rgba(0, 0, 0, 0.25);
-    border-radius: 5px; 
-    margin-bottom: 30px; 
+    border : 1.5px solid #5a5a5a;
+    border-radius: 5px;  
     padding: 2.2px;
     background-color: #FFFFFF;
-    color:#5a5a5a;
+    color:black;
+    :hover {
+        border-color:white;
+    } 
 `;
 
-
 export const LabelForm = styled.p`
-    margin-top: -11px; 
+    margin-top:${(props: Props) => `${props.correctHeight ? -9 : -10}px`};  
     text-align: left;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     max-width: ${(props: Props) => `${props.maxWidth || 35}px`};  
-    font-size: 12px;
+    font-size: 0.75em;
+    line-height: 1;
     margin-left: 6px;
-    color:#5a5a5a;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60% , #FFFFFF 40%) no-repeat;
-    padding-left: 5px;
-    background-color: rgba(0, 0, 0, 0);
+    color:black;
+    letter-spacing: 0.00938em;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 54% , #FFFFFF 10%) no-repeat;
+    padding-left: 5px; 
 `;

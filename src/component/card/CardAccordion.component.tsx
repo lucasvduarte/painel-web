@@ -16,11 +16,11 @@ const FormMunicipalityDetails = ({ children, title }: Props) => {
     childrenList.shift();
     return (
         <Card accordion={title ? true : false} titleAccordion={title} botton={0}>
-            <CardStyledSub>
-                <GridComponent spacing={3} justify="flex-start">
-                    {childrenOne}
-                </GridComponent>
-            </CardStyledSub>
+
+            <GridComponent spacing={3} justify="flex-start">
+                {childrenOne}
+            </GridComponent>
+
             {childrenList.map((child: ReactNode) => { return child }) || <></>}
         </Card>
     )
