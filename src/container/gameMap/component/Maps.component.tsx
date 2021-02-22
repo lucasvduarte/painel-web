@@ -49,7 +49,7 @@ export const GameMapComponent = ({ google, data, location_lat, location_lng }: a
 
     return (
         //@ts-ignore
-        <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: location_lat || -7.230287, lng: location_lng || -35.903393 }} style={{ margin: '0% 3% 10% 3%', borderRadius: 12, height: 480 }}>
+        <Map google={google} zoom={14} onClick={onMapClicked} initialCenter={{ lat: location_lat || -7.230287, lng: location_lng || -35.903393 }} style={{ margin: '0% 3% 10% 3%', borderRadius: 12, height: !data?.length ? 300 : 480 }}>
             {!data?.length ? marker(location_lat, location_lng) : markerPoints(data)}
             {(data && data?.length) ? InfoWindowMaps() : <></>}
         </Map>

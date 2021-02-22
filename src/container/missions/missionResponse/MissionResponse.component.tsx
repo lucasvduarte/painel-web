@@ -7,10 +7,11 @@ import { getSeeAnswerMissions, putSeeMyAnswer, getByMissions } from '../Missions
 import MissionsStatus from '../interface/MissionsStatus';
 import Maps from '../../gameMap/component/Maps.component';
 import { Grid } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 import { useSnackbar } from '../../../context/Snackbar';
 import Missions from '../interface/Missions';
 import Form from './Form.component';
+import CardMissionResponse from './CardMissionResponse.component';
+import { Video, Image, Audio, TextResponse } from './MissionResponse';
 
 const statusRejected: any = { status: "Rejeitado", imp: 0, people: 0 };
 
@@ -47,46 +48,48 @@ export default function View({ allMissions }: MissionsInterface) {
 
     const image = (image: any) => {
         return (
-            <Card noPadding >
-                <Img src={image} alt="imageDefaultUser" height={220} width={300} />
-            </Card>
+            <CardMissionResponse title="Foto">
+                <Image src={image} alt="imageDefaultUser" />
+            </CardMissionResponse>
         )
     }
     const text = (text: any) => {
         return (
-            <Card >
-                {text}
-            </Card>
+            <CardMissionResponse title="Texto">
+                <TextResponse>
+                    {text}
+                </TextResponse>
+            </CardMissionResponse>
         )
     }
 
     const video = (video: any) => {
         return (
-            <Card noPadding>
-                <video src={video} controls style={{ width: '100%', maxWidth: 550, maxHeight: 230, borderRadius: 12 }}>
+            <CardMissionResponse title="Vídeo">
+                <Video src={video} controls>
                     Seu navegador não suporta o elemento <code>video</code>.
-                    </video>
-            </Card >
+                </Video>
+            </CardMissionResponse>
         )
     }
 
     const audio = (audio: any) => {
         return (
-            <Card noPadding>
-                <audio src={audio} controls loop>
+            <CardMissionResponse title="Áudio" audio>
+                <Audio src={audio} controls loop>
                     Navegador não suporta
-                </audio>
-            </Card>
+                </Audio>
+            </CardMissionResponse>
         )
     }
 
     const map = (location_lat: string, location_lng: string) => {
         return (
-            <Card noPadding >
-                <div style={{ position: 'relative', height: 480, width: '100%' }}>
+            <CardMissionResponse title="Localização" map>
+                <div style={{ position: 'relative' }}>
                     <Maps location_lat={location_lat} location_lng={location_lng} />
                 </div>
-            </Card >
+            </CardMissionResponse>
         )
     }
 
@@ -126,20 +129,21 @@ export default function View({ allMissions }: MissionsInterface) {
     }
 
     return (
-        <Header>
+        <Header namePage="Missão" subPage="Resposta da missão">
             <Card>
                 <div>  Usuario: {seeAnswerMissions?._user.name}</div>
                 <div>  Missão: {seeAnswerMissions?._mission.name}</div>
+                <GridComponent justify="flex-start" alignItems="flex-start"  >
+
+                    {seeAnswerMissions?.video && video(seeAnswerMissions?.video)}
+                    {seeAnswerMissions?.image && image(seeAnswerMissions?.image)}
+                    {(seeAnswerMissions?.location_lng && seeAnswerMissions?.location_lat) && map(seeAnswerMissions?.location_lat, seeAnswerMissions.location_lng)}
+
+                    {seeAnswerMissions?.text_msg && text(seeAnswerMissions?.text_msg)}
+                    {seeAnswerMissions?.audio && audio(seeAnswerMissions?.audio)}
+
+                </GridComponent>
             </Card>
-            {seeAnswerMissions?.text_msg && text(seeAnswerMissions?.text_msg)}
-            {seeAnswerMissions?.audio && audio(seeAnswerMissions?.audio)}
-
-
-            {seeAnswerMissions?.image && image(seeAnswerMissions?.image)}
-
-            {seeAnswerMissions?.video && video(seeAnswerMissions?.video)}
-
-            {(seeAnswerMissions?.location_lng && seeAnswerMissions?.location_lat) && map(seeAnswerMissions?.location_lat, seeAnswerMissions.location_lng)}
             <GridComponent spacing={3}>
                 <Grid item>
                     <Button.ButtonC title="Rejeita Missão" onClick={() => handleSubmit(statusRejected)}></Button.ButtonC>
