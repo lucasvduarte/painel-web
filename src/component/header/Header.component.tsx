@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Children } from 'react';
 import { NamePage, SubPage } from './HeaderStyle';
 import ButtonLink from '../button/ButtonLink.component';
 import { ContainerResponsive } from '../container/Container';
@@ -14,6 +14,12 @@ interface Props {
 }
 
 export default function Hearder({ namePage, subPage, link, title, children, can }: Props) {
+    const childrenList: Array<ReactNode> = Children.toArray(children);
+    const childrenOne: ReactNode = childrenList[0] || <></>;
+
+    if (childrenList.length > 1) {
+        childrenList.shift();
+    }
 
     return (
         <ContainerResponsive>
@@ -23,10 +29,17 @@ export default function Hearder({ namePage, subPage, link, title, children, can 
                     {subPage && <SubPage>{subPage}</SubPage>}
                 </Grid>
             </ContainerResponsive>
-            {can && <Grid>
-                {(link && title) && <ButtonLink link={link} title={title} />}
-            </Grid>}
-            {children}
+            {childrenList.length > 1 && (
+                <Grid>
+                    {childrenOne}
+                </Grid>
+            )}
+            {can && (
+                <ContainerResponsive marginBottom={10}>
+                    {(link && title) && <ButtonLink link={link} title={title} />}
+                </ContainerResponsive>
+            )}
+            {childrenList.map((child: ReactNode) => { return child }) || <></>}
         </ContainerResponsive>
     );
 }

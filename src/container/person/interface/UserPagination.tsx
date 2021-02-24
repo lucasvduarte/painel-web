@@ -6,4 +6,5 @@ export interface InterfacePagination extends Pagination {
     email?: string;
     type?: string;
     institution?: string;
+    sec_points?: number | string;
 }

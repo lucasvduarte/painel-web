@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
-import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
+import { INITIAL_VALUES_PAGINATION, INITIAL_VALUES } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ import Quizzes from './interface/Quizzes';
 import { QuizzesInterface } from './interface/QuizzesComponent';
 import { getToken } from '../../core/auth/auth';
 import { authentication } from '../../core/auth/Authentication';
+import FormFilter from './form/FormFilter.component';
 
 export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
 
@@ -21,6 +22,7 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(true);
     const [total, setTotal] = useState<number>(0);
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         let paginationAux: InterfacePagination = pagination;
@@ -68,6 +70,11 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
         }
     };
 
+    const onSubmit = (quiz: Quizzes) => {
+        setPagination({ ...pagination, title: quiz.title, description: quiz.description, secret_code: quiz.secret_code, lux: quiz.lux, resources: quiz.resources });
+        handleClick();
+    };
+
     const handleClickDelete = async () => {
         await deleteQuizzes(openModalDelete).then(res => {
             setSnackbar({ ...snackbar, msg: "Quiz excluído com sucesso!", type: 'success' });
@@ -79,8 +86,15 @@ export default function QuizzesComponent({ allQuizzes }: QuizzesInterface) {
         });
     };
 
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
     return (
         <Header namePage={`${allQuizzes ? 'Todos os' : 'Meus'} Quizzes`} link="/quizzes/meus-quizzes/novo-quiz" title='Adicionar Quiz' can={(authentication() && !allQuizzes)}>
+            <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
+                <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
+            </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse quiz?" />
             <Table

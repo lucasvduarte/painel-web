@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
-import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
+import { INITIAL_VALUES_PAGINATION, INITIAL_VALUES } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useSnackbar } from '../../context/Snackbar';
 import { InterfacePagination } from './interface/UserPagination';
 import User from './interface/User';
 import { authentication } from '../../core/auth/Authentication';
+import FormFilter from './form/FormFilter.component';
 
 export default function UserComponent() {
 
@@ -19,6 +20,7 @@ export default function UserComponent() {
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(true);
     const [total, setTotal] = useState<number>(0);
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         getUser(pagination).then(res => {
@@ -48,8 +50,9 @@ export default function UserComponent() {
         setOpenModalDelete(value || '');
     };
 
-    const onSubmit = (user: InterfacePagination) => {
-        //setPagination({ ...pagination, uf: user.uf, municipio: user.municipio, unidadeOperacao: user?.unidadeOperacao, dataValidacaoInicial: user.dataValidacaoInicial, meioValidacaoFinal: user.meioValidacaoFinal });
+    const onSubmit = (user: User) => {
+        setPagination({ ...pagination, name: user.name, email: user.email, type: user.type, sec_points: user.sec_points });
+        handleClick();
     };
 
     const handleClickAction = (action: Action, user: InterfacePagination) => {
@@ -72,8 +75,15 @@ export default function UserComponent() {
         });
     };
 
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
     return (
         <Header namePage="Pessoas" link="/usuarios/novo-usuario" title="Adicionar Usuário" can={authentication()}>
+            <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
+                <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} isRequired={false} />
+            </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão desse usuário?" />
             <Table
@@ -93,6 +103,7 @@ export default function UserComponent() {
                 onRequestSort={handleRequestSort}
                 handleClickAction={handleClickAction}
             />
+
         </Header>
     );
 }

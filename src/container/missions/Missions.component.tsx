@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { Header, Table, Modal } from '../../component/Component';
-import { INITIAL_VALUES_PAGINATION } from './utils/INITIAL_VALUES';
+import { INITIAL_VALUES_PAGINATION, INITIAL_VALUES } from './utils/INITIAL_VALUES';
 import { Action, ACTION_EDIT, ACTION_DELETE, ACTION_VIEW } from '../../component/table/interfaces/TableInterface';
 import { HEAD_CELL, HEAD_CELL_NO_ACTION } from './utils/HEAD_CELL';
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ import Missions from './interface/Missions';
 import { MissionsInterface } from './interface/MissionsComponent';
 import { getToken } from "../../core/auth/auth";
 import { authentication } from '../../core/auth/Authentication';
+import FormFilter from './form/FormFilter.component';
 
 export default function MissionsComponent({ allMissions }: MissionsInterface) {
 
@@ -21,6 +22,7 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
     const [pagination, setPagination] = useState<InterfacePagination>(INITIAL_VALUES_PAGINATION);
     const [request, setRequest] = useState(true);
     const [total, setTotal] = useState<number>(0);
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         let paginationAux: InterfacePagination = pagination;
@@ -56,8 +58,9 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
         setOpenModalDelete(value || '');
     };
 
-    const onSubmit = (Missions: InterfacePagination) => {
-        //setPagination({ ...pagination, uf: Missions.uf, municipio: Missions.municipio, unidadeOperacao: Missions?.unidadeOperacao, dataValidacaoInicial: Missions.dataValidacaoInicial, meioValidacaoFinal: Missions.meioValidacaoFinal });
+    const onSubmit = (missions: Missions) => {
+        setPagination({ ...pagination, name: missions.name, description: missions.description, lux: missions.lux, resources: missions.resources, end_message: missions.end_message });
+        handleClick();
     };
 
     const handleClickAction = (action: Action, Missions: InterfacePagination) => {
@@ -83,8 +86,16 @@ export default function MissionsComponent({ allMissions }: MissionsInterface) {
         });
     };
 
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
     return (
         <Header namePage={`${allMissions ? 'Todas as' : 'Minhas'} Missões`} link="/missoes/minhas-missoes/nova-missao" title='Adicionar Missão' can={(authentication() && !allMissions)} >
+
+            <Modal.ModalC open={open} handleClick={handleClick} title='Pesquisar' >
+                <FormFilter handleSubmit={onSubmit} initialValues={INITIAL_VALUES} onClick={handleClick} />
+            </Modal.ModalC>
 
             <Modal.ModalDelete open={!!openModalDelete} handleClick={() => handleClickModalDelete('')} onClickSubmit={handleClickDelete} title="Confirma a exclusão dessa missão?" />
             <Table

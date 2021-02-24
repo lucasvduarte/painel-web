@@ -6,4 +6,6 @@ export interface InterfacePagination extends Pagination {
     title?: string;
     description?: string;
     secret_code?: string;
+    lux?: string | number;
+    resources?: string | number;
 }

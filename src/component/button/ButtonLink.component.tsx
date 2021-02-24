@@ -10,7 +10,7 @@ interface Props {
 export default function ButtonComponent({ link, title }: Props) {
     return (
         <LinkRouter to={link}>
-            <LinkButton>
+            <LinkButton >
                 {title}
             </LinkButton>
         </LinkRouter>
