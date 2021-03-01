@@ -1,22 +1,31 @@
 import React from 'react';
 import Item from '../interface/Item';
 import { GridComponent } from '../../../component/Component';
-import { Img, CardSteled, Span, SubSpan, Container } from './TableBody';
+import { Img, CardSteled, Span, Container, Icons } from './TableBody';
 import defaultImg from '../../../assets/defaultImg.png';
 import Grid from '@material-ui/core/Grid';
 import { FormatDate } from '../../../utils/format/FormatDate';
 import { TableBodyInterface } from '../interface/TableBody';
+import { Delete, Edit, VisibilitySharp } from '@material-ui/icons';
+import { ACTION_VIEW, ACTION_EDIT, ACTION_DELETE } from '../../../component/table/interfaces/TableInterface';
+import ActionButton from '../../../component/table/component/tablebody/component/ActionButton.component';
+import SubInfo from './SubInfo.component';
 
-const TableBody = ({ data, children }: TableBodyInterface) => {
+const TableBody = ({ data, isPupils, onClick }: TableBodyInterface) => {
 
-    const subInfo = (text: string, information: string | number) => {
+    const buttons = (id: string) => {
         return (
-            <Grid item xs={6}>
-                <GridComponent justify="flex-start" alignItems="baseline">
-                    <SubSpan marginRight={5}>{text}</SubSpan>
-                    <SubSpan fontSize={14}>
-                        {information}
-                    </SubSpan>
+            <Grid item xs={11}>
+                <GridComponent justify="flex-end" alignItems="center">
+                    <ActionButton title="Visualizar" left={0}>
+                        <VisibilitySharp fontSize="small" color="primary" onClick={() => onClick(ACTION_VIEW, id)} />
+                    </ActionButton>
+                    <ActionButton title="Editar">
+                        <Edit fontSize="small" color="primary" onClick={() => onClick(ACTION_EDIT, id)} />
+                    </ActionButton>
+                    <ActionButton title="Deletar">
+                        <Delete fontSize="small" color="primary" onClick={() => onClick(ACTION_DELETE, id)} />
+                    </ActionButton>
                 </GridComponent>
             </Grid>
         )
@@ -29,12 +38,12 @@ const TableBody = ({ data, children }: TableBodyInterface) => {
                     <Img src={item.image ? item.image : defaultImg} alt="images" />
                     <Span>{item.title}</Span>
                     <Grid container >
-                        {subInfo('Valor: ', item.value)}
-                        {subInfo('Quantidade: ', item.quantity)}
-                        {subInfo('De: ', FormatDate(item.start_time))}
-                        {subInfo('Até: ', FormatDate(item.end_time) || '...')}
+                        <SubInfo text="Valor:" information={item.value}></SubInfo>
+                        <SubInfo text="Quantidade:" information={item.quantity}></SubInfo>
+                        <SubInfo text="De:" information={FormatDate(item.start_time)}></SubInfo>
+                        <SubInfo text="Até:" information={FormatDate(item.end_time) || '...'}></SubInfo>
                     </Grid>
-                    {children}
+                    {!isPupils && <Icons>{buttons(item._id || '')}</Icons>}
                 </CardSteled>
             );
         });

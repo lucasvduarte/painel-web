@@ -18,3 +18,15 @@ export const FormatTimeZone = (date: string | Date | undefined) => {
     }
     return date;
 }
+
+export const FormatDateHours = (date: string) => {
+    if (!date) {
+        return '';
+    }
+
+    let dateList: Array<string> = date.split('T');
+    let newDate: string = dateList[0];
+    let hours: string = dateList[1].split('.')[0];
+
+    return `${FormatDate(newDate)} ás ${hours}`;
+}

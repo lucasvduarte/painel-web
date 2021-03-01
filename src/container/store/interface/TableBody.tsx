@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
 import Item from './Item';
 
 export interface TableBodyInterface {
     data: Array<Item>;
-    children?: ReactNode;
+    isPupils?: boolean;
+    onClick(action: 'ACTION_VIEW' | 'ACTION_EDIT' | 'ACTION_DELETE', value: string): void;
 }

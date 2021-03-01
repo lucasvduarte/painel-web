@@ -25,7 +25,7 @@ export default function View({ allMissions }: MissionsInterface) {
             }
         }).finally(function () {
             setRequest(false)
-        });;
+        });
     }, [id, status]);
 
     const handleClickAction = (action: Action, missions: any) => {

@@ -32,13 +32,28 @@ export const Text = styled(({ ...props }) => (
         margin-left: 220px;
         transition: 0.2s ease-in;
     }
+    @media (max-width: 800px) {
+        margin-left: 150px;
+        transition: 0.2s ease-in;
+    }
     @media (max-width: 700px) {
-        margin-left: 120px;
+        margin-left: 100px;
+        transition: 0.2s ease-in;
+    }
+    @media (max-width: 630px) {
+        font-size: 16px;
+        margin-left: 30px;
         transition: 0.2s ease-in;
     }
     @media (max-width: 500px) {
         font-size: 16px;
         margin-left: 0px;
+        transition: 0.2s ease-in;
+    }
+    @media (max-width: 470px) {
+        font-size: 0px;
+        margin-left: 0px;
+        display: none;
         transition: 0.2s ease-in;
     }
   }
@@ -56,4 +71,16 @@ export const Title = styled(({ ...props }) => (
         transition: 0.2s ease-in;
     }
   }
+`;
+
+export const AvatarMenu = styled.div` 
+    position: absolute;
+    right: 30px;
+    top: -3px;
+    transition: 0.2s ease-in;
+    @media (max-width: 600px) {
+      right: 10px; 
+      top: -8px;
+      transition: 0.2s ease-in;
+    }
 `;

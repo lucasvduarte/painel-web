@@ -23,6 +23,7 @@ import { SpanStyled } from './span/SpanStyle';
 import ButtonHome from './button/ButtonHome.component';
 import MenuPages from './menu/Menu.component';
 import { Image } from './img/Img';
+import AvatarStyled from './avatar/Avatar.component';
 
 export const Menu = { AppBar, ToolBar, Main, MenuPages, Hearder };
 export const Container = ContainerStyled;
@@ -39,3 +40,4 @@ export const HeaderRegister = HeaderRegisterC;
 export const Tabs = Tab;
 export const Span = SpanStyled;
 export const Img = Image;
+export const Avatar = AvatarStyled;

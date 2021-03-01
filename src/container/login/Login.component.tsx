@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Header, Card, GridComponent } from '../../component/Component';
+import { GridComponent } from '../../component/Component';
 import { useHistory } from "react-router-dom";
 import FormLogin from './form/Form.component';
 import Login from './interface/Login';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import ParamTypes from '../../../core/interfaces/ParamTypes';
 import { MissionsInterface } from '../interface/MissionsComponent';
-import { Header, Card, Img, Button, GridComponent } from '../../../component/Component';
+import { Header, Card, Button, GridComponent } from '../../../component/Component';
 import { getSeeAnswerMissions, putSeeMyAnswer, getByMissions } from '../Missions.service';
 import MissionsStatus from '../interface/MissionsStatus';
 import Maps from '../../gameMap/component/Maps.component';
