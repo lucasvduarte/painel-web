@@ -1,3 +1,3 @@
 export interface Status {
-    status: 'pendente' | 'aprovado';
+    status: 'pendente' | 'aprovado' | 'rejeitado';
 }

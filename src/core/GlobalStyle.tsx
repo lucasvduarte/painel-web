@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, #58AFFF 5.21%, #0060B8 72.4%) no-repeat;
-    min-height: 97.5vh; 
+    min-height: 97.7vh; 
   }
 
   code {

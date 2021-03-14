@@ -7,4 +7,5 @@ export interface Props {
     onClick?(e: MouseEvent<HTMLElement>): void;
     disabled?: boolean;
     fullWidth?: boolean;
+    variant?: "text" | "outlined" | "contained" | undefined;
 }

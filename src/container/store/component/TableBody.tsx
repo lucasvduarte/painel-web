@@ -33,8 +33,8 @@ export const CardSteled2 = styled(({ ...props }) => (
     <Paper elevation={0} {...props} />
 ))` 
    && { 
-        width: 290px;
-        height: 350px;
+        width: 280px;
+        height: 360px;
         margin: 12px;
         border-radius: 12px;
         padding: 5px;  

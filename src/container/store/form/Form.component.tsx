@@ -1,7 +1,7 @@
 import 'date-fns';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Formik, Form as FormikForm, FormikProps } from 'formik';
-import { Button, Progress, Form, GridComponent, Span } from "../../../component/Component";
+import { Button, Progress, Form, GridComponent, Span, Img } from "../../../component/Component";
 import { FormProps } from '../interface/Form';
 import { Grid } from '@material-ui/core';
 import Item from '../interface/Item';
@@ -16,10 +16,22 @@ const FormItem = ({ handleSubmit, initialValues, request }: FormProps) => {
         return <Progress open={request} />
     }
 
+    const handleChangeImg = (setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void, event: ChangeEvent<HTMLInputElement>): void => {
+        const reader = new FileReader();
+        const { files } = event.target;
+        if (files) {
+            reader.readAsDataURL(files[0]);
+            reader.onloadend = () => {
+                setFieldValue('image', reader.result);
+            };
+        }
+    }
+
     return (
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validate} validateOnChange={false} >
             {({ values, handleChange, errors, setFieldValue, isSubmitting }: FormikProps<Item>) => (
                 <FormikForm>
+                    {console.log(values.image)}
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <Form.FormInput
@@ -91,6 +103,10 @@ const FormItem = ({ handleSubmit, initialValues, request }: FormProps) => {
                                     </MuiPickersUtilsProvider>
                                 </Grid>
                             </GridComponent>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button.ButtonImport onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeImg(setFieldValue, event)} disabled={!!values?._id} />
+                            {values.image && <Img src={values.image} alt={`image-store`} borderRadius={12} />}
                         </Grid>
                     </Grid>
 

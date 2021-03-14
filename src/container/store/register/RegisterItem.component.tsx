@@ -28,25 +28,13 @@ export default function RegisterItem() {
     }, [id]);
 
     const onSubmit = async (data: Item) => {
-        await (id ? Edit(data) : Register(data));
-    };
-
-    const Register = (data: Item): Promise<any> => {
-        return postStore(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Item foi cadastrado!", type: 'success' });
-            history.push('/Item/meus-Item');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Item não foi cadastrado!", type: 'error' });
-        });
-    };
-
-    const Edit = (data: Item): Promise<any> => {
-        return putStore(data).then(res => {
-            setSnackbar({ ...snackbar, msg: "Item foi Atualizado!", type: 'success' });
-            history.push('/Item/meus-Item');
-        }).catch(error => {
-            setSnackbar({ ...snackbar, msg: "Item não foi Atualizado!", type: 'error' });
-        });
+        try {
+            await (id ? putStore(data) : postStore(data));
+            setSnackbar({ ...snackbar, msg: `Item foi ${id ? 'atualizado' : 'cadastrado'} com sucesso!`, type: 'success' });
+            history.push(`/Item/meus-Item`);
+        } catch (error) {
+            setSnackbar({ ...snackbar, msg: `Erro ao ${id ? 'atualizar' : 'cadastrar'} Item!`, type: 'error' });
+        }
     };
 
     return (
